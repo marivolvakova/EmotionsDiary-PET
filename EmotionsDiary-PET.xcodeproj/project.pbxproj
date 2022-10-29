@@ -9,21 +9,37 @@
 /* Begin PBXBuildFile section */
 		D6C54A2A290D3B6E004F3722 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A29290D3B6E004F3722 /* AppDelegate.swift */; };
 		D6C54A2C290D3B6E004F3722 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A2B290D3B6E004F3722 /* SceneDelegate.swift */; };
-		D6C54A2E290D3B6E004F3722 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A2D290D3B6E004F3722 /* ViewController.swift */; };
+		D6C54A2E290D3B6E004F3722 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A2D290D3B6E004F3722 /* CalendarViewController.swift */; };
 		D6C54A31290D3B6E004F3722 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6C54A2F290D3B6E004F3722 /* Main.storyboard */; };
 		D6C54A33290D3B6F004F3722 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6C54A32290D3B6F004F3722 /* Assets.xcassets */; };
 		D6C54A36290D3B6F004F3722 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6C54A34290D3B6F004F3722 /* LaunchScreen.storyboard */; };
+		D6C54A3F290D4237004F3722 /* DiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A3E290D4237004F3722 /* DiaryView.swift */; };
+		D6C54A42290D425B004F3722 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D6C54A41290D425B004F3722 /* SnapKit */; };
+		D6C54A45290D4269004F3722 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = D6C54A44290D4269004F3722 /* FSCalendar */; };
+		D6C54A47290D42AE004F3722 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A46290D42AE004F3722 /* CalendarCell.swift */; };
+		D6C54A49290D4A1F004F3722 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A48290D4A1F004F3722 /* Model.swift */; };
+		D6C54A4C290D4A6E004F3722 /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A4B290D4A6E004F3722 /* Date+String.swift */; };
+		D6C54A4F290D4AEB004F3722 /* EmotionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A4E290D4AEB004F3722 /* EmotionsViewController.swift */; };
+		D6C54A51290D4B15004F3722 /* MistakesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A50290D4B15004F3722 /* MistakesViewController.swift */; };
+		D6C54A53290D4B31004F3722 /* NewEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A52290D4B31004F3722 /* NewEntryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D6C54A26290D3B6E004F3722 /* EmotionsDiary-PET.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EmotionsDiary-PET.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C54A29290D3B6E004F3722 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6C54A2B290D3B6E004F3722 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D6C54A2D290D3B6E004F3722 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D6C54A2D290D3B6E004F3722 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		D6C54A30290D3B6E004F3722 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D6C54A32290D3B6F004F3722 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D6C54A35290D3B6F004F3722 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D6C54A37290D3B6F004F3722 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D6C54A3E290D4237004F3722 /* DiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryView.swift; sourceTree = "<group>"; };
+		D6C54A46290D42AE004F3722 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
+		D6C54A48290D4A1F004F3722 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		D6C54A4B290D4A6E004F3722 /* Date+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
+		D6C54A4E290D4AEB004F3722 /* EmotionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionsViewController.swift; sourceTree = "<group>"; };
+		D6C54A50290D4B15004F3722 /* MistakesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MistakesViewController.swift; sourceTree = "<group>"; };
+		D6C54A52290D4B31004F3722 /* NewEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +47,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6C54A42290D425B004F3722 /* SnapKit in Frameworks */,
+				D6C54A45290D4269004F3722 /* FSCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,15 +74,38 @@
 		D6C54A28290D3B6E004F3722 /* EmotionsDiary-PET */ = {
 			isa = PBXGroup;
 			children = (
-				D6C54A29290D3B6E004F3722 /* AppDelegate.swift */,
+				D6C54A4A290D4A49004F3722 /* Extension */,
+				D6C54A3D290D4200004F3722 /* DiaryModule */,
 				D6C54A2B290D3B6E004F3722 /* SceneDelegate.swift */,
-				D6C54A2D290D3B6E004F3722 /* ViewController.swift */,
 				D6C54A2F290D3B6E004F3722 /* Main.storyboard */,
 				D6C54A32290D3B6F004F3722 /* Assets.xcassets */,
-				D6C54A34290D3B6F004F3722 /* LaunchScreen.storyboard */,
 				D6C54A37290D3B6F004F3722 /* Info.plist */,
+				D6C54A4E290D4AEB004F3722 /* EmotionsViewController.swift */,
+				D6C54A50290D4B15004F3722 /* MistakesViewController.swift */,
+				D6C54A52290D4B31004F3722 /* NewEntryViewController.swift */,
+				D6C54A29290D3B6E004F3722 /* AppDelegate.swift */,
+				D6C54A34290D3B6F004F3722 /* LaunchScreen.storyboard */,
 			);
 			path = "EmotionsDiary-PET";
+			sourceTree = "<group>";
+		};
+		D6C54A3D290D4200004F3722 /* DiaryModule */ = {
+			isa = PBXGroup;
+			children = (
+				D6C54A3E290D4237004F3722 /* DiaryView.swift */,
+				D6C54A46290D42AE004F3722 /* CalendarCell.swift */,
+				D6C54A48290D4A1F004F3722 /* Model.swift */,
+				D6C54A2D290D3B6E004F3722 /* CalendarViewController.swift */,
+			);
+			path = DiaryModule;
+			sourceTree = "<group>";
+		};
+		D6C54A4A290D4A49004F3722 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D6C54A4B290D4A6E004F3722 /* Date+String.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +124,10 @@
 			dependencies = (
 			);
 			name = "EmotionsDiary-PET";
+			packageProductDependencies = (
+				D6C54A41290D425B004F3722 /* SnapKit */,
+				D6C54A44290D4269004F3722 /* FSCalendar */,
+			);
 			productName = "EmotionsDiary-PET";
 			productReference = D6C54A26290D3B6E004F3722 /* EmotionsDiary-PET.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +156,10 @@
 				Base,
 			);
 			mainGroup = D6C54A1D290D3B6E004F3722;
+			packageReferences = (
+				D6C54A40290D425B004F3722 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				D6C54A43290D4269004F3722 /* XCRemoteSwiftPackageReference "FSCalendar" */,
+			);
 			productRefGroup = D6C54A27290D3B6E004F3722 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,9 +187,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6C54A2E290D3B6E004F3722 /* ViewController.swift in Sources */,
+				D6C54A53290D4B31004F3722 /* NewEntryViewController.swift in Sources */,
+				D6C54A4C290D4A6E004F3722 /* Date+String.swift in Sources */,
+				D6C54A2E290D3B6E004F3722 /* CalendarViewController.swift in Sources */,
 				D6C54A2A290D3B6E004F3722 /* AppDelegate.swift in Sources */,
+				D6C54A3F290D4237004F3722 /* DiaryView.swift in Sources */,
+				D6C54A51290D4B15004F3722 /* MistakesViewController.swift in Sources */,
+				D6C54A4F290D4AEB004F3722 /* EmotionsViewController.swift in Sources */,
+				D6C54A49290D4A1F004F3722 /* Model.swift in Sources */,
 				D6C54A2C290D3B6E004F3722 /* SceneDelegate.swift in Sources */,
+				D6C54A47290D42AE004F3722 /* CalendarCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +414,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D6C54A40290D425B004F3722 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+		D6C54A43290D4269004F3722 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D6C54A41290D425B004F3722 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D6C54A40290D425B004F3722 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		D6C54A44290D4269004F3722 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D6C54A43290D4269004F3722 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D6C54A1E290D3B6E004F3722 /* Project object */;
 }

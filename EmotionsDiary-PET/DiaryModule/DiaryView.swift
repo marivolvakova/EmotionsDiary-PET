@@ -17,9 +17,9 @@ class CalendarView: UIView {
     
     lazy var segmentControl: UISegmentedControl = {
         let segmentControl = UISegmentedControl(items: ["МЕСЯЦ", "НЕДЕЛЯ"])
-        segmentControl.selectedSegmentTintColor = UIColor(red: 103 / 255, green: 112 / 255, blue: 241 / 255, alpha: 1)
+        segmentControl.selectedSegmentTintColor = UIColor(red: 8 / 255, green: 232 / 255, blue: 222 / 255, alpha: 1)
         segmentControl.backgroundColor = .systemGroupedBackground
-        segmentControl.selectedSegmentIndex = 0
+        segmentControl.selectedSegmentIndex = 1
         return segmentControl
     }()
     
@@ -81,7 +81,7 @@ class CalendarView: UIView {
     // MARK: - Settings
     
     func setupView() {
-        backgroundColor = .darkGray
+        backgroundColor = .white
     }
     
     func setupHierarchy() {

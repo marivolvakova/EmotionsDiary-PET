@@ -19,6 +19,17 @@ class CalendarViewController: UIViewController {
         return view as? CalendarView
     }
     
+    lazy var someView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .label
+        
+        return view
+    }()
+    
+    
+    
+    let modalView = SettingsModalViewController()
+    
     private var model = [EventModel]()
     
     var selectedDate = Date()
@@ -43,11 +54,20 @@ class CalendarViewController: UIViewController {
     
     private func setupView() {
         calendarView?.tableView.dataSource = self
-        calendarView?.calendar.delegate = self
-        calendarView?.segmentControl.addTarget(self, action: #selector(controlDidChanged(_:)), for: .valueChanged)
         
-        navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: nil, action: nil)
+        
+
+        
+        let leftBarButton = UIBarButtonItem(image: UIImage(systemName: "text.alignleft"), style: .plain, target: self, action: #selector(showSettings))
+        leftBarButton.tintColor = .black
+        
+        let rightBarButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(showSettings))
+        rightBarButton.tintColor = .black
+        
+        navigationItem.leftBarButtonItem = leftBarButton
+        navigationItem.rightBarButtonItem = rightBarButton
     }
+    
     
     // MARK: - Functions
     
@@ -61,12 +81,22 @@ class CalendarViewController: UIViewController {
         return daysEvents
     }
     
-    @objc func controlDidChanged(_ segmentControl: UISegmentedControl) {
-        if calendarView?.segmentControl.selectedSegmentIndex == 1 {
-            calendarView?.calendar.setScope(.week, animated: calendarView?.toggle.isOn ?? true)
-        } else if calendarView?.segmentControl.selectedSegmentIndex == 0 {
-            calendarView?.calendar.setScope(.month, animated: calendarView?.toggle.isOn ?? true)
+    func layout() {
+        someView.snp.makeConstraints { make in
+            make.top.equalTo(calendar.snp.bottom).offset(30)
+            
+            make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(15)
+            make.right.equalTo(safeAreaLayoutGuide.snp.right).offset(-15)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-15)
         }
+    }
+
+    @objc func showSettings() {
+        
+        let vc = SettingsModalViewController()
+        vc.modalPresentationStyle = .formSheet
+        vc.sheetPresentationController?.detents = [.medium()]
+        present(vc, animated: true)
     }
 }
 
@@ -99,14 +129,7 @@ extension CalendarViewController: FSCalendarDelegate {
     }
 }
 
-    // MARK: - FSCalendarDelegateAppearance
-    
-extension CalendarViewController: FSCalendarDelegateAppearance {
-    
-    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
-        calendarView?.remakeCalendarConstraints(bounds: bounds)
-    }
-}
+
     
 //extension CalendarViewModel: FSCalendarDataSource {
 //    func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {

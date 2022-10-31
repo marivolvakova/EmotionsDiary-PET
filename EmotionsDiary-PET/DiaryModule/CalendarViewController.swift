@@ -19,7 +19,9 @@ class CalendarViewController: UIViewController {
         return view as? CalendarView
     }
     
-    private var model = [EventModel]()
+    private var model = [Event]()
+    
+    var storageManager = StorageManager.shared
     
     var selectedDate = Date()
     
@@ -37,6 +39,7 @@ class CalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        storageManager.makeStorage()
     }
     
     // MARK: - Setup functions
@@ -67,9 +70,9 @@ class CalendarViewController: UIViewController {
         }
     }
     
-    func eventsForDate(date: Date) -> [EventModel]  {
-        var daysEvents = [EventModel]()
-        for event in EventsList().events {
+    func eventsForDate(date: Date) -> [Event]  {
+        var daysEvents = [Event]()
+        for event in storageManager.items {
             if Calendar.current.isDate(event.date, inSameDayAs: date) {
                 daysEvents.append(event)
             }
@@ -98,23 +101,6 @@ extension CalendarViewController: FSCalendarDelegate {
         print(date.convertToString())
         selectedDate = date
         calendarView?.tableView.reloadData()
-    }
-    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, borderDefaultColorFor date: Date) -> UIColor? {
-        for event in EventsList().events {
-            if Calendar.current.isDate(event.date, inSameDayAs: date) {
-                switch event.colorGroup {
-                case .homeworkDeadline:
-                    return UIColor.red
-                case .homeworkOpen:
-                    return UIColor.systemYellow
-                case .newConspect:
-                    return UIColor.purple
-                case .groupCall:
-                    return UIColor.systemOrange
-                }
-            }
-        }
-        return nil
     }
 }
 
@@ -175,28 +161,33 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
 
 extension CalendarViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return eventsForDate(date: selectedDate).count
+        var daysEvents = [Event]()
+        for event in storageManager.items {
+            if Calendar.current.isDate(event.date, inSameDayAs: selectedDate) {
+                daysEvents.append(event)
+            }
+        }
+        return 3
+        //daysEvents.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let event = eventsForDate(date: selectedDate)[indexPath.row]
+        
+        var daysEvents = [Event]()
+        for event in storageManager.items {
+            if Calendar.current.isDate(event.date, inSameDayAs: selectedDate) {
+                daysEvents.append(event)
+            }
+        }
+
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: CalendarCell.identifier, for: indexPath) as! CalendarCell
-        cell.titleLable.text = event.name
-        cell.noteLable.text = event.description
-        cell.timeLable.text = Date().timeString(date: event.date)
+        cell.titleLable.text = "daysEvents[indexPath.row].situation"
+        cell.noteLable.text = "daysEvents[indexPath.row].thoughts"
+        cell.timeLable.text = "Date().timeString(date: daysEvents[indexPath.row].date)"
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
-        
-        switch event.colorGroup {
-        case .groupCall:
-            cell.imageView?.image = UIImage(systemName: "phone.badge.plus")
-        case .newConspect:
-            cell.imageView?.image = UIImage(systemName: "book")!
-        case .homeworkOpen:
-            cell.imageView?.image = UIImage(systemName: "folder.badge.plus")!
-        case .homeworkDeadline:
-            cell.imageView?.image = UIImage(systemName: "clock.badge.exclamationmark")!
-        }
+        cell.imageView?.image = UIImage(systemName: "phone.badge.plus")
         return cell
     }
 }

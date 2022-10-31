@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D651E51A290FD71F00C14438 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D651E519290FD71F00C14438 /* Realm */; };
+		D60CF17F29106BCF005A322C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D60CF17E29106BCF005A322C /* RealmSwift */; };
+		D651E52A29105B3000C14438 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D651E52929105B3000C14438 /* StorageManager.swift */; };
 		D6C54A2A290D3B6E004F3722 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A29290D3B6E004F3722 /* AppDelegate.swift */; };
 		D6C54A2C290D3B6E004F3722 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A2B290D3B6E004F3722 /* SceneDelegate.swift */; };
 		D6C54A2E290D3B6E004F3722 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A2D290D3B6E004F3722 /* CalendarViewController.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D651E52929105B3000C14438 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		D6C54A26290D3B6E004F3722 /* EmotionsDiary-PET.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EmotionsDiary-PET.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C54A29290D3B6E004F3722 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6C54A2B290D3B6E004F3722 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -48,7 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D651E51A290FD71F00C14438 /* Realm in Frameworks */,
+				D60CF17F29106BCF005A322C /* RealmSwift in Frameworks */,
 				D6C54A42290D425B004F3722 /* SnapKit in Frameworks */,
 				D6C54A45290D4269004F3722 /* FSCalendar in Frameworks */,
 			);
@@ -87,6 +89,7 @@
 				D6C54A52290D4B31004F3722 /* NewEntryViewController.swift */,
 				D6C54A29290D3B6E004F3722 /* AppDelegate.swift */,
 				D6C54A34290D3B6F004F3722 /* LaunchScreen.storyboard */,
+				D651E52929105B3000C14438 /* StorageManager.swift */,
 			);
 			path = "EmotionsDiary-PET";
 			sourceTree = "<group>";
@@ -129,7 +132,7 @@
 			packageProductDependencies = (
 				D6C54A41290D425B004F3722 /* SnapKit */,
 				D6C54A44290D4269004F3722 /* FSCalendar */,
-				D651E519290FD71F00C14438 /* Realm */,
+				D60CF17E29106BCF005A322C /* RealmSwift */,
 			);
 			productName = "EmotionsDiary-PET";
 			productReference = D6C54A26290D3B6E004F3722 /* EmotionsDiary-PET.app */;
@@ -162,7 +165,7 @@
 			packageReferences = (
 				D6C54A40290D425B004F3722 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				D6C54A43290D4269004F3722 /* XCRemoteSwiftPackageReference "FSCalendar" */,
-				D651E518290FD71F00C14438 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				D60CF17D29106BCF005A322C /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = D6C54A27290D3B6E004F3722 /* Products */;
 			projectDirPath = "";
@@ -193,6 +196,7 @@
 			files = (
 				D6C54A53290D4B31004F3722 /* NewEntryViewController.swift in Sources */,
 				D6C54A4C290D4A6E004F3722 /* Date+String.swift in Sources */,
+				D651E52A29105B3000C14438 /* StorageManager.swift in Sources */,
 				D6C54A2E290D3B6E004F3722 /* CalendarViewController.swift in Sources */,
 				D6C54A2A290D3B6E004F3722 /* AppDelegate.swift in Sources */,
 				D6C54A3F290D4237004F3722 /* DiaryView.swift in Sources */,
@@ -420,7 +424,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D651E518290FD71F00C14438 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+		D60CF17D29106BCF005A322C /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
@@ -447,10 +451,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D651E519290FD71F00C14438 /* Realm */ = {
+		D60CF17E29106BCF005A322C /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D651E518290FD71F00C14438 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
+			package = D60CF17D29106BCF005A322C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 		D6C54A41290D425B004F3722 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

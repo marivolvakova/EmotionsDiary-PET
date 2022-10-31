@@ -21,14 +21,14 @@ class CalendarCell: UITableViewCell {
     
     var titleLable: UILabel = {
         let lable = UILabel()
-        lable.textColor = .white
+        lable.textColor = .black
         lable.font = UIFont.systemFont(ofSize: 16)
         return lable
     }()
     
     var noteLable: UILabel = {
         let lable = UILabel()
-        lable.textColor = .white
+        lable.textColor = .black
         lable.font = UIFont.systemFont(ofSize: 12)
         lable.numberOfLines = 3
         return lable
@@ -36,7 +36,7 @@ class CalendarCell: UITableViewCell {
     
     var timeLable: UILabel = {
         let lable = UILabel()
-        lable.textColor = .white
+        lable.textColor = .black
         return lable
     }()
     

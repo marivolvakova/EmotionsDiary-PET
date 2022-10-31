@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import SnapKit
 
 class NewEntryViewController: UIViewController {
-    
+
     var emotionsListIsOpen = false
     var newEntryDictionary = [[String: String]]()
 
@@ -17,6 +18,8 @@ class NewEntryViewController: UIViewController {
         setupHierarchy()
         setupLayout()
         setupView()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: nil)
     }
     
     func setupView() {
@@ -30,7 +33,7 @@ class NewEntryViewController: UIViewController {
         let label = UILabel()
         label.textColor = .black
         label.text = text
-        label.font = .systemFont(ofSize: 18, weight: .semibold)
+        label.font = .preferredFont(forTextStyle: .footnote)
         return label
     }
     func createTextFields(with placeholderText: String) -> UITextField {
@@ -148,10 +151,10 @@ class NewEntryViewController: UIViewController {
     }
 
     func setupLayout() {
-        parentStack.translatesAutoresizingMaskIntoConstraints = false
-
-        parentStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 18).isActive = true
-        parentStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -18).isActive = true
-        parentStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 18).isActive = true
+        parentStack.snp.makeConstraints { make in
+            make.top.equalTo(view.snp.top).offset(40)
+            make.left.equalTo(view.snp.left).offset(18)
+            make.right.equalTo(view.snp.right).offset(-18)
+        }
     }
 }

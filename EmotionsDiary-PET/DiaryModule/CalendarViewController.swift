@@ -19,17 +19,6 @@ class CalendarViewController: UIViewController {
         return view as? CalendarView
     }
     
-    lazy var someView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .label
-        
-        return view
-    }()
-    
-    
-    
-    let modalView = SettingsModalViewController()
-    
     private var model = [EventModel]()
     
     var selectedDate = Date()
@@ -54,14 +43,13 @@ class CalendarViewController: UIViewController {
     
     private func setupView() {
         calendarView?.tableView.dataSource = self
-        
-        
-
+        calendarView?.segmentControl.addTarget(self, action: #selector(controlDidChanged(_:)), for: .valueChanged)
+        calendarView?.calendar.delegate = self
         
         let leftBarButton = UIBarButtonItem(image: UIImage(systemName: "text.alignleft"), style: .plain, target: self, action: #selector(showSettings))
         leftBarButton.tintColor = .black
         
-        let rightBarButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(showSettings))
+        let rightBarButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(makeNewEntry))
         rightBarButton.tintColor = .black
         
         navigationItem.leftBarButtonItem = leftBarButton
@@ -70,6 +58,14 @@ class CalendarViewController: UIViewController {
     
     
     // MARK: - Functions
+    
+    @objc func controlDidChanged(_ segmentControl: UISegmentedControl) {
+        if calendarView?.segmentControl.selectedSegmentIndex == 0 {
+            calendarView?.calendar.setScope(.month, animated: true)
+        } else if segmentControl.selectedSegmentIndex == 1 {
+            calendarView?.calendar.setScope(.week, animated: true)
+        }
+    }
     
     func eventsForDate(date: Date) -> [EventModel]  {
         var daysEvents = [EventModel]()
@@ -81,26 +77,20 @@ class CalendarViewController: UIViewController {
         return daysEvents
     }
     
-    func layout() {
-        someView.snp.makeConstraints { make in
-            make.top.equalTo(calendar.snp.bottom).offset(30)
-            
-            make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(15)
-            make.right.equalTo(safeAreaLayoutGuide.snp.right).offset(-15)
-            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-15)
-        }
-    }
-
     @objc func showSettings() {
-        
-        let vc = SettingsModalViewController()
-        vc.modalPresentationStyle = .formSheet
-        vc.sheetPresentationController?.detents = [.medium()]
-        present(vc, animated: true)
+        self.present(calendarView!.settingsView, animated: true)
+    }
+    
+    @objc func makeNewEntry() {
+        let modalController = NewEntryViewController()
+        modalController.modalPresentationStyle = .formSheet
+        modalController.sheetPresentationController?.detents = [.large()]
+        modalController.sheetPresentationController?.prefersGrabberVisible = true
+        present(modalController, animated: true)
     }
 }
 
-    // MARK: - FSCalendarDelegate
+// MARK: - FSCalendarDelegate
 
 extension CalendarViewController: FSCalendarDelegate {
     
@@ -109,7 +99,6 @@ extension CalendarViewController: FSCalendarDelegate {
         selectedDate = date
         calendarView?.tableView.reloadData()
     }
-    
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, borderDefaultColorFor date: Date) -> UIColor? {
         for event in EventsList().events {
             if Calendar.current.isDate(event.date, inSameDayAs: date) {
@@ -129,8 +118,15 @@ extension CalendarViewController: FSCalendarDelegate {
     }
 }
 
+// MARK: - FSCalendarDelegateAppearance
 
+extension CalendarViewController: FSCalendarDelegateAppearance {
     
+    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
+        calendarView?.remakeCalendarConstraints(bounds: bounds)
+    }
+}
+
 //extension CalendarViewModel: FSCalendarDataSource {
 //    func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
 //        var returnValue = UIImage()
@@ -150,9 +146,9 @@ extension CalendarViewController: FSCalendarDelegate {
 //        }
 //        return returnValue
 //    }
-    
-    ///Метод для создания цветных иконок
-    
+
+///Метод для создания цветных иконок
+
 //        func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
 //
 //            let cell = calendar.dequeueReusableCell(withIdentifier: "cell", for: date, at: position)
@@ -175,7 +171,7 @@ extension CalendarViewController: FSCalendarDelegate {
 //        }
 
 
-    // MARK: - UITableViewDataSource
+// MARK: - UITableViewDataSource
 
 extension CalendarViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

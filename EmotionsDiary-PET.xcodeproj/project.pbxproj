@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D60BE651290F051C00D98AD7 /* SettingsModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60BE650290F051C00D98AD7 /* SettingsModalViewController.swift */; };
+		D651E51A290FD71F00C14438 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D651E519290FD71F00C14438 /* Realm */; };
 		D6C54A2A290D3B6E004F3722 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A29290D3B6E004F3722 /* AppDelegate.swift */; };
 		D6C54A2C290D3B6E004F3722 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A2B290D3B6E004F3722 /* SceneDelegate.swift */; };
 		D6C54A2E290D3B6E004F3722 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A2D290D3B6E004F3722 /* CalendarViewController.swift */; };
@@ -26,7 +26,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D60BE650290F051C00D98AD7 /* SettingsModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModalViewController.swift; sourceTree = "<group>"; };
 		D6C54A26290D3B6E004F3722 /* EmotionsDiary-PET.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EmotionsDiary-PET.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C54A29290D3B6E004F3722 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6C54A2B290D3B6E004F3722 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D651E51A290FD71F00C14438 /* Realm in Frameworks */,
 				D6C54A42290D425B004F3722 /* SnapKit in Frameworks */,
 				D6C54A45290D4269004F3722 /* FSCalendar in Frameworks */,
 			);
@@ -98,7 +98,6 @@
 				D6C54A2D290D3B6E004F3722 /* CalendarViewController.swift */,
 				D6C54A46290D42AE004F3722 /* CalendarCell.swift */,
 				D6C54A48290D4A1F004F3722 /* Model.swift */,
-				D60BE650290F051C00D98AD7 /* SettingsModalViewController.swift */,
 			);
 			path = DiaryModule;
 			sourceTree = "<group>";
@@ -130,6 +129,7 @@
 			packageProductDependencies = (
 				D6C54A41290D425B004F3722 /* SnapKit */,
 				D6C54A44290D4269004F3722 /* FSCalendar */,
+				D651E519290FD71F00C14438 /* Realm */,
 			);
 			productName = "EmotionsDiary-PET";
 			productReference = D6C54A26290D3B6E004F3722 /* EmotionsDiary-PET.app */;
@@ -162,6 +162,7 @@
 			packageReferences = (
 				D6C54A40290D425B004F3722 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				D6C54A43290D4269004F3722 /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				D651E518290FD71F00C14438 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = D6C54A27290D3B6E004F3722 /* Products */;
 			projectDirPath = "";
@@ -191,7 +192,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6C54A53290D4B31004F3722 /* NewEntryViewController.swift in Sources */,
-				D60BE651290F051C00D98AD7 /* SettingsModalViewController.swift in Sources */,
 				D6C54A4C290D4A6E004F3722 /* Date+String.swift in Sources */,
 				D6C54A2E290D3B6E004F3722 /* CalendarViewController.swift in Sources */,
 				D6C54A2A290D3B6E004F3722 /* AppDelegate.swift in Sources */,
@@ -420,6 +420,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D651E518290FD71F00C14438 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		D6C54A40290D425B004F3722 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -439,6 +447,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D651E519290FD71F00C14438 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D651E518290FD71F00C14438 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
 		D6C54A41290D425B004F3722 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D6C54A40290D425B004F3722 /* XCRemoteSwiftPackageReference "SnapKit" */;

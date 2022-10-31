@@ -46,12 +46,12 @@ class CalendarView: UIView {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.tintColor = .white
+        tableView.tintColor = .black
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.separatorInsetReference = .fromCellEdges
         tableView.register(CalendarCell.self, forCellReuseIdentifier: CalendarCell.identifier)
-        tableView.rowHeight = 50
+        tableView.rowHeight = 100
         return tableView
     }()
     
@@ -133,8 +133,8 @@ class CalendarView: UIView {
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(calendar.snp.bottom).offset(30)
-            make.left.equalTo(snp.left).offset(15)
-            make.right.equalTo(snp.right).offset(-15)
+            make.left.equalTo(snp.left).offset(10)
+            make.right.equalTo(snp.right).offset(-10)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-15)
         }
     }

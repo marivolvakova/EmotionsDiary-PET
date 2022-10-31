@@ -167,8 +167,7 @@ extension CalendarViewController: UITableViewDataSource {
                 daysEvents.append(event)
             }
         }
-        return 3
-        //daysEvents.count
+        return daysEvents.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -179,15 +178,19 @@ extension CalendarViewController: UITableViewDataSource {
                 daysEvents.append(event)
             }
         }
-
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: CalendarCell.identifier, for: indexPath) as! CalendarCell
-        cell.titleLable.text = "daysEvents[indexPath.row].situation"
-        cell.noteLable.text = "daysEvents[indexPath.row].thoughts"
-        cell.timeLable.text = "Date().timeString(date: daysEvents[indexPath.row].date)"
-        cell.backgroundColor = .clear
-        cell.selectionStyle = .none
-        cell.imageView?.image = UIImage(systemName: "phone.badge.plus")
+        cell.timeLable.text = Date().timeString(date: daysEvents[indexPath.row].date)
+        cell.situationLable.text = daysEvents[indexPath.row].situation
+        cell.emotionsLable.text = daysEvents[indexPath.row].emotions
+        cell.backgroundColor = .white
+        cell.selectionStyle = .default
+        cell.layer.cornerRadius = 30
+        cell.layer.borderColor = CGColor.init(red: 0, green: 0, blue: 0, alpha: 1)
+        cell.layer.borderWidth = 1
+        cell.layer.shadowColor = CGColor.init(red: 0, green: 0, blue: 0, alpha: 1)
+        cell.layer.shadowOpacity = 2
+        cell.layer.shadowOffset = CGSize(width: 8, height: 8)
+        cell.layer.shadowRadius = 38
         return cell
     }
 }

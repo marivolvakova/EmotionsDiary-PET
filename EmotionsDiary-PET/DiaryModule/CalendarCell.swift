@@ -11,32 +11,27 @@ import SnapKit
 class CalendarCell: UITableViewCell {
     
     static let identifier = "CalendarTableViewCell"
-    
-    var image: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        image.tintColor = .orange
-        return image
-    }()
-    
-    var titleLable: UILabel = {
+        
+    var timeLable: UILabel = {
         let lable = UILabel()
         lable.textColor = .black
         lable.font = UIFont.systemFont(ofSize: 16)
         return lable
     }()
     
-    var noteLable: UILabel = {
+    var situationLable: UILabel = {
         let lable = UILabel()
         lable.textColor = .black
-        lable.font = UIFont.systemFont(ofSize: 12)
-        lable.numberOfLines = 3
+        lable.font = .systemFont(ofSize: 14, weight: .bold)
+        lable.numberOfLines = 1
         return lable
     }()
     
-    var timeLable: UILabel = {
+    var emotionsLable: UILabel = {
         let lable = UILabel()
         lable.textColor = .black
+        lable.font = .systemFont(ofSize: 12, weight: .regular)
+        lable.numberOfLines = 1
         return lable
     }()
     
@@ -45,32 +40,23 @@ class CalendarCell: UITableViewCell {
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
         stackView.alignment = .leading
+
         return stackView
     }()
     
     func setupHierarchy() {
-        addSubview(image)
         addSubview(stackView)
-        stackView.addArrangedSubview(titleLable)
-        stackView.addArrangedSubview(noteLable)
-        addSubview(timeLable)
+        stackView.addArrangedSubview(timeLable)
+        stackView.addArrangedSubview(situationLable)
+        stackView.addArrangedSubview(emotionsLable)
     }
     
     func setupLayout() {
         
-        image.snp.makeConstraints { make in
-            make.leading.equalTo(snp.leading)
-            make.centerY.equalTo(snp.centerY)
-        }
-        
         stackView.snp.makeConstraints { make in
-            make.leading.equalTo(image.snp.trailing).offset(55)
-            make.centerY.equalTo(snp.centerY)
-        }
-        
-        timeLable.snp.makeConstraints { make in
-            make.trailing.equalTo(snp.trailing)
-            make.centerY.equalTo(snp.centerY)
+            make.top.equalTo(snp.top).offset(10)
+            make.left.equalTo(snp.left).offset(10)
+            make.bottom.equalTo(snp.bottom).offset(-10)
         }
     }
     

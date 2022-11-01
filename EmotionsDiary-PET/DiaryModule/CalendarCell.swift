@@ -23,7 +23,11 @@ class CalendarCell: UITableViewCell {
         let lable = UILabel()
         lable.textColor = .black
         lable.font = .systemFont(ofSize: 14, weight: .bold)
-        lable.numberOfLines = 1
+        lable.numberOfLines = 0
+        lable.lineBreakMode = .byWordWrapping
+        lable.sizeToFit()
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        lable.heightAnchor.constraint(equalToConstant: 20).isActive = true
         return lable
     }()
     
@@ -31,7 +35,7 @@ class CalendarCell: UITableViewCell {
         let lable = UILabel()
         lable.textColor = .black
         lable.font = .systemFont(ofSize: 12, weight: .regular)
-        lable.numberOfLines = 1
+        lable.numberOfLines = 0
         return lable
     }()
     

@@ -29,6 +29,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             ]
         tabBarController.viewControllers = controllers.map { UINavigationController(rootViewController: $0)}
         window?.rootViewController = tabBarController
+        
+//        let nav = UINavigationController(rootViewController: CollectionViewController())
+//
+//        window?.rootViewController = nav
+        
         window?.makeKeyAndVisible()
     }
 }

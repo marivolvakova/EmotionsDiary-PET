@@ -44,6 +44,9 @@ class CalendarViewController: UIViewController {
         calendarView?.tableView.dataSource = self
         calendarView?.tableView.delegate = self
         calendarView?.segmentControl.addTarget(self, action: #selector(controlDidChanged(_:)), for: .valueChanged)
+        
+        calendarView?.mainSegmentControl.addTarget(self, action: #selector(mainControlDidChanged(_:)), for: .valueChanged)
+        
         calendarView?.calendar.delegate = self
         calendarView?.calendar.dataSource = self
         
@@ -60,10 +63,24 @@ class CalendarViewController: UIViewController {
     // MARK: - Functions
     
     @objc func controlDidChanged(_ segmentControl: UISegmentedControl) {
-        if calendarView?.segmentControl.selectedSegmentIndex == 0 {
+        if segmentControl.selectedSegmentIndex == 0 {
             calendarView?.calendar.setScope(.month, animated: true)
         } else if segmentControl.selectedSegmentIndex == 1 {
             calendarView?.calendar.setScope(.week, animated: true)
+        }
+    }
+    
+    @objc func mainControlDidChanged(_ segmentControl: UISegmentedControl) {
+        if segmentControl.selectedSegmentIndex == 0 {
+            calendarView?.calendar.isHidden = true
+            calendarView?.lineView.isHidden = true
+            calendarView?.titleLentaLabel.isHidden = false
+            calendarView?.remakeTablViewConstraints()
+        } else if segmentControl.selectedSegmentIndex == 1 {
+            calendarView?.calendar.isHidden = false
+            calendarView?.lineView.isHidden = false
+            calendarView?.titleLentaLabel.isHidden = true
+            calendarView?.remakeTablViewConstraints()
         }
     }
     
@@ -177,7 +194,7 @@ extension CalendarViewController: UITableViewDataSource {
                 daysEvents.append(event)
             }
         }
-        return daysEvents.count
+        return daysEvents.count > 0 ? daysEvents.count : 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -192,13 +209,16 @@ extension CalendarViewController: UITableViewDataSource {
             }
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: CalendarCell.identifier, for: indexPath) as! CalendarCell
-        cell.timeLable.text = (daysEvents[indexPath.row].date).convertToString()
-        cell.situationLable.text = daysEvents[indexPath.row].situation
-        cell.emotionsLable.text = daysEvents[indexPath.row].emotions
-        cell.backgroundColor = .white
-        cell.selectionStyle = .none
-        cell.layer.cornerRadius = 30
         
+        if daysEvents.count > 0 {
+            cell.timeLable.text = daysEvents[indexPath.row].date.convertToString()
+            cell.situationLable.text = daysEvents[indexPath.row].situation
+            cell.emotionsLable.text = daysEvents[indexPath.row].emotions
+            cell.backgroundColor = .white
+            cell.selectionStyle = .blue
+        } else {
+            cell.situationLable.text = "Создайте свою первую запись нажав на полюс в правом верхнем углу!"
+        }
 
         return cell
     }
@@ -209,5 +229,9 @@ extension CalendarViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 1
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "334fjgj"
     }
 }

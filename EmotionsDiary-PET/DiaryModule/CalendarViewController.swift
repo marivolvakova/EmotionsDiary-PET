@@ -31,13 +31,9 @@ class CalendarViewController: UIViewController {
         view = CalendarView()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        calendarView?.tableView.reloadData()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        calendarView?.tableView.reloadData()
         setupView()
         storageManager.makeStorage()
     }
@@ -46,8 +42,10 @@ class CalendarViewController: UIViewController {
     
     private func setupView() {
         calendarView?.tableView.dataSource = self
+        calendarView?.tableView.delegate = self
         calendarView?.segmentControl.addTarget(self, action: #selector(controlDidChanged(_:)), for: .valueChanged)
         calendarView?.calendar.delegate = self
+        calendarView?.calendar.dataSource = self
         
         let leftBarButton = UIBarButtonItem(image: UIImage(systemName: "text.alignleft"), style: .plain, target: self, action: #selector(showSettings))
         leftBarButton.tintColor = .black
@@ -58,7 +56,6 @@ class CalendarViewController: UIViewController {
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = rightBarButton
     }
-    
     
     // MARK: - Functions
     
@@ -113,7 +110,19 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
     }
 }
 
-//extension CalendarViewModel: FSCalendarDataSource {
+extension CalendarViewController: FSCalendarDataSource {
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+var dates = [Date]()
+        for event in storageManager.items {
+            dates.append(event.date)
+        }
+        
+        if dates.contains(date) {
+            return 1
+        }
+        return 0
+    }
+}
 //    func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
 //        var returnValue = UIImage()
 //        for event in EventsList().events {
@@ -160,7 +169,8 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
 // MARK: - UITableViewDataSource
 
 extension CalendarViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         var daysEvents = [Event]()
         for event in storageManager.items {
             if Calendar.current.isDate(event.date, inSameDayAs: selectedDate) {
@@ -168,6 +178,9 @@ extension CalendarViewController: UITableViewDataSource {
             }
         }
         return daysEvents.count
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -179,21 +192,22 @@ extension CalendarViewController: UITableViewDataSource {
             }
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: CalendarCell.identifier, for: indexPath) as! CalendarCell
-        cell.timeLable.text = Date().timeString(date: daysEvents[indexPath.row].date)
+        cell.timeLable.text = (daysEvents[indexPath.row].date).convertToString()
         cell.situationLable.text = daysEvents[indexPath.row].situation
         cell.emotionsLable.text = daysEvents[indexPath.row].emotions
         cell.backgroundColor = .white
-        cell.selectionStyle = .default
+        cell.selectionStyle = .none
         cell.layer.cornerRadius = 30
-        cell.layer.borderColor = CGColor.init(red: 0, green: 0, blue: 0, alpha: 1)
-        cell.layer.borderWidth = 1
-        cell.layer.shadowColor = CGColor.init(red: 0, green: 0, blue: 0, alpha: 1)
-        cell.layer.shadowOpacity = 2
-        cell.layer.shadowOffset = CGSize(width: 8, height: 8)
-        cell.layer.shadowRadius = 38
+        
+
         return cell
     }
 }
 
 
+extension CalendarViewController: UITableViewDelegate {
 
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 1
+    }
+}

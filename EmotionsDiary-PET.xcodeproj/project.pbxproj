@@ -19,7 +19,6 @@
 		D6C54A42290D425B004F3722 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D6C54A41290D425B004F3722 /* SnapKit */; };
 		D6C54A45290D4269004F3722 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = D6C54A44290D4269004F3722 /* FSCalendar */; };
 		D6C54A47290D42AE004F3722 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A46290D42AE004F3722 /* CalendarCell.swift */; };
-		D6C54A49290D4A1F004F3722 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A48290D4A1F004F3722 /* Model.swift */; };
 		D6C54A4C290D4A6E004F3722 /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A4B290D4A6E004F3722 /* Date+String.swift */; };
 		D6C54A4F290D4AEB004F3722 /* EmotionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A4E290D4AEB004F3722 /* EmotionsViewController.swift */; };
 		D6C54A51290D4B15004F3722 /* MistakesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A50290D4B15004F3722 /* MistakesViewController.swift */; };
@@ -38,7 +37,6 @@
 		D6C54A37290D3B6F004F3722 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6C54A3E290D4237004F3722 /* DiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryView.swift; sourceTree = "<group>"; };
 		D6C54A46290D42AE004F3722 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
-		D6C54A48290D4A1F004F3722 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		D6C54A4B290D4A6E004F3722 /* Date+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
 		D6C54A4E290D4AEB004F3722 /* EmotionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionsViewController.swift; sourceTree = "<group>"; };
 		D6C54A50290D4B15004F3722 /* MistakesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MistakesViewController.swift; sourceTree = "<group>"; };
@@ -100,7 +98,6 @@
 				D6C54A3E290D4237004F3722 /* DiaryView.swift */,
 				D6C54A2D290D3B6E004F3722 /* CalendarViewController.swift */,
 				D6C54A46290D42AE004F3722 /* CalendarCell.swift */,
-				D6C54A48290D4A1F004F3722 /* Model.swift */,
 			);
 			path = DiaryModule;
 			sourceTree = "<group>";
@@ -202,7 +199,6 @@
 				D6C54A3F290D4237004F3722 /* DiaryView.swift in Sources */,
 				D6C54A51290D4B15004F3722 /* MistakesViewController.swift in Sources */,
 				D6C54A4F290D4AEB004F3722 /* EmotionsViewController.swift in Sources */,
-				D6C54A49290D4A1F004F3722 /* Model.swift in Sources */,
 				D6C54A2C290D3B6E004F3722 /* SceneDelegate.swift in Sources */,
 				D6C54A47290D42AE004F3722 /* CalendarCell.swift in Sources */,
 			);

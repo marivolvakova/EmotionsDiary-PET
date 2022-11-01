@@ -15,13 +15,22 @@ class CalendarView: UIView {
 
     lazy var formatter = DateFormatter()
     
-    lazy var settingsView: UIViewController = {
+    let settingsView: UIViewController = {
         let view = UIViewController()
-        view.modalPresentationStyle = .formSheet
+        view.modalPresentationStyle = .pageSheet
         view.sheetPresentationController?.detents = [.medium()]
         view.sheetPresentationController?.prefersGrabberVisible = true
         view.sheetPresentationController?.prefersScrollingExpandsWhenScrolledToEdge = false
         view.view.backgroundColor = .white
+        return view
+    }()
+    
+    lazy var lineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray
+        view.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        view.layer.masksToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -35,6 +44,19 @@ class CalendarView: UIView {
         label.textColor = .black
         return label
     }()
+    
+    lazy var closeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(closeView), for: .touchUpInside)
+        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.tintColor = .black
+        return button
+    }()
+    
+    @objc func closeView() {
+        settingsView.dismiss(animated: true)
+    }
     
     lazy var segmentControl: UISegmentedControl = {
         let segmentControl = UISegmentedControl(items: ["Месяц", "Неделя"])
@@ -106,19 +128,26 @@ class CalendarView: UIView {
     
     func setupHierarchy() {
         addSubview(calendar)
+        addSubview(lineView)
         addSubview(tableView)
         settingsView.view.addSubview(calendarViewLable)
         settingsView.view.addSubview(segmentControl)
+        settingsView.view.addSubview(closeButton)
     }
     
     func setupLayout() {
         calendarViewLable.snp.makeConstraints { make in
-            make.top.equalTo(settingsView.view.snp.top).offset(30)
+            make.top.equalTo(settingsView.view.safeAreaLayoutGuide.snp.top).offset(50)
             make.left.equalTo(settingsView.view.snp.left).offset(20)
+        }
+        
+        closeButton.snp.makeConstraints { make in
+            make.top.equalTo(settingsView.view.safeAreaLayoutGuide.snp.top).offset(20)
+            make.right.equalTo(settingsView.view.snp.right).offset(-20)
         }
 
         segmentControl.snp.makeConstraints { make in
-            make.top.equalTo(calendarViewLable.snp.bottom).offset(10)
+            make.top.equalTo(calendarViewLable.snp.bottom).offset(15)
             make.width.equalTo(350)
             make.height.equalTo(35)
             make.centerX.equalTo(settingsView.view.snp.centerX)
@@ -131,10 +160,16 @@ class CalendarView: UIView {
             make.height.equalTo(250)
         }
         
+        lineView.snp.makeConstraints { make in
+            make.top.equalTo(tableView.snp.top).offset(-1)
+            make.left.equalTo(snp.left)
+            make.right.equalTo(snp.right)
+        }
+        
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(calendar.snp.bottom).offset(30)
-            make.left.equalTo(snp.left).offset(10)
-            make.right.equalTo(snp.right).offset(-10)
+            make.top.equalTo(calendar.snp.bottom).offset(10)
+            make.left.equalTo(snp.left)
+            make.right.equalTo(snp.right)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-15)
         }
     }

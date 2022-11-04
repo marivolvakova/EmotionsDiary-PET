@@ -28,7 +28,7 @@ extension Date {
 extension String {
     public func convertToDate() -> Date? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
+        dateFormatter.dateFormat = "E, dd.MM, HH:mm"
         return dateFormatter.date(from: self)
     }
 }

@@ -12,7 +12,6 @@ class CalendarView: UIView {
     
     // MARK: - Properties
     
-    
     lazy var formatter = DateFormatter()
     
     let settingsView: UIViewController = {
@@ -90,7 +89,7 @@ class CalendarView: UIView {
         tableView.separatorStyle = .none
         tableView.separatorInsetReference = .fromCellEdges
         tableView.register(CalendarCell.self, forCellReuseIdentifier: CalendarCell.identifier)
-        tableView.rowHeight = 100
+        tableView.rowHeight = 80
         return tableView
     }()
     
@@ -189,7 +188,7 @@ class CalendarView: UIView {
         }
         
         lineView.snp.makeConstraints { make in
-            make.top.equalTo(tableView.snp.top).offset(-1)
+            make.top.equalTo(tableView.snp.top).offset(-20)
             make.left.equalTo(snp.left)
             make.right.equalTo(snp.right)
         }
@@ -199,7 +198,7 @@ class CalendarView: UIView {
         }
 
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(calendar.snp.bottom).offset(10)
+            make.top.equalTo(calendar.snp.bottom).offset(30)
             make.left.equalTo(snp.left)
             make.right.equalTo(snp.right)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-15)
@@ -218,14 +217,14 @@ class CalendarView: UIView {
     func remakeTablViewConstraints() {
         if mainSegmentControl.selectedSegmentIndex == 0 {
             tableView.snp.remakeConstraints { make in
-                make.top.equalTo(snp.top).offset(20)
+                make.top.equalTo(titleLentaLabel.snp.bottom).offset(15)
                 make.left.equalTo(snp.left)
                 make.right.equalTo(snp.right)
                 make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-15)
             }
         } else if mainSegmentControl.selectedSegmentIndex == 1 {
             tableView.snp.remakeConstraints { make in
-                make.top.equalTo(calendar.snp.bottom).offset(10)
+                make.top.equalTo(calendar.snp.bottom).offset(30)
                 make.left.equalTo(snp.left)
                 make.right.equalTo(snp.right)
                 make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-15)

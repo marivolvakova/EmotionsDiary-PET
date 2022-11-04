@@ -27,13 +27,6 @@ class NewEntryViewController: UIViewController {
     
     // MARK: - Stacks
     
-    lazy var parentStack: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 15
-        return stackView
-    }()
-    
     lazy var saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("Сохранить", for: .normal)
@@ -47,44 +40,19 @@ class NewEntryViewController: UIViewController {
     
     lazy var closeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(closeView), for: .touchUpInside)
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
         button.tintColor = .black
         return button
     }()
     
-//    // Date picker
-//    lazy var dateTextField: UITextField = {
-//        let textField = UITextField()
-//        textField.textAlignment = .center
-//        textField.inputView = datePicker
-//        textField.text = formatDate(date: Date())
-//        textField.font = .systemFont(ofSize: 16, weight: .regular)
-//        textField.backgroundColor = .white
-//        textField.layer.borderColor = UIColor.black.cgColor
-//        textField.layer.cornerRadius = 10
-//        return textField
-//    }()
-    
-//    func createToolbar() {
-//        let toolbar = UIToolbar()
-//        let doneButton = UIBarButtonItem(title: "Готово", style: .plain, target: self, action: #selector(doneDatePicker));
-//        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-//       let cancelButton = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(cancelDatePicker))
-//        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-//        toolbar.sizeToFit()
-//        dateTextField.inputAccessoryView = toolbar
-//    }
-//
-//    @objc func doneDatePicker() {
-//    dateTextField.text = formatDate(date: datePicker.date)
-//       self.view.endEditing(true)
-//     }
-//
-//     @objc func cancelDatePicker(){
-//        self.view.endEditing(true)
-//      }
+    lazy var reminderButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.addTarget(self, action: #selector(closeView), for: .touchUpInside)
+        button.setImage(UIImage(systemName: "info.circle.fill"), for: .normal)
+        button.tintColor = .black
+        return button
+    }()
 
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -192,17 +160,16 @@ class NewEntryViewController: UIViewController {
         view.addSubview(closeButton)
         view.addSubview(dateLabel)
         view.addSubview(datePicker)
-        view.addSubview(parentStack)
         
-        parentStack.addArrangedSubview(situationLabel)
-        parentStack.addArrangedSubview(situationTextField)
-        parentStack.addArrangedSubview(thoughtsLabel)
-        parentStack.addArrangedSubview(thoughtsTextField)
-        parentStack.addArrangedSubview(emotionsLabel)
-        parentStack.addArrangedSubview(emotionsTextField)
-        parentStack.addArrangedSubview(reactionLabel)
-        parentStack.addArrangedSubview(reactionTextField)
-        parentStack.addArrangedSubview(saveButton)
+        view.addSubview(situationLabel)
+        view.addSubview(situationTextField)
+        view.addSubview(thoughtsLabel)
+        view.addSubview(thoughtsTextField)
+        view.addSubview(emotionsLabel)
+        view.addSubview(emotionsTextField)
+        view.addSubview(reactionLabel)
+        view.addSubview(reactionTextField)
+        view.addSubview(saveButton)
     }
     
     func setupLayout() {
@@ -224,8 +191,51 @@ class NewEntryViewController: UIViewController {
             make.width.equalTo(200)
             make.height.equalTo(30)
         }
-        parentStack.snp.makeConstraints { make in
+    
+        situationLabel.snp.makeConstraints { make in
             make.top.equalTo(datePicker.snp.bottom).offset(20)
+            make.left.equalTo(view.snp.left).offset(18)
+            make.right.equalTo(view.snp.right).offset(-18)
+        }
+        situationTextField.snp.makeConstraints { make in
+            make.top.equalTo(situationLabel.snp.bottom).offset(15)
+            make.left.equalTo(view.snp.left).offset(18)
+            make.right.equalTo(view.snp.right).offset(-18)
+        }
+        thoughtsLabel.snp.makeConstraints { make in
+            make.top.equalTo(situationTextField.snp.bottom).offset(15)
+            make.left.equalTo(view.snp.left).offset(18)
+            make.right.equalTo(view.snp.right).offset(-18)
+        }
+        thoughtsTextField.snp.makeConstraints { make in
+            make.top.equalTo(thoughtsLabel.snp.bottom).offset(15)
+            make.left.equalTo(view.snp.left).offset(18)
+            make.right.equalTo(view.snp.right).offset(-18)
+        }
+        emotionsLabel.snp.makeConstraints { make in
+            make.top.equalTo(thoughtsTextField.snp.bottom).offset(15)
+            make.left.equalTo(view.snp.left).offset(18)
+            make.right.equalTo(view.snp.right).offset(-18)
+        }
+        emotionsTextField.snp.makeConstraints { make in
+            make.top.equalTo(emotionsLabel.snp.bottom).offset(15)
+            make.left.equalTo(view.snp.left).offset(18)
+            make.right.equalTo(view.snp.right).offset(-18)
+        }
+        reactionLabel.snp.makeConstraints { make in
+            make.top.equalTo(emotionsTextField.snp.bottom).offset(15)
+            make.left.equalTo(view.snp.left).offset(18)
+            make.right.equalTo(view.snp.right).offset(-18)
+        }
+        
+        reactionTextField.snp.makeConstraints { make in
+            make.top.equalTo(reactionLabel.snp.bottom).offset(15)
+            make.left.equalTo(view.snp.left).offset(18)
+            make.right.equalTo(view.snp.right).offset(-18)
+        }
+        
+        saveButton.snp.makeConstraints { make in
+            make.top.equalTo(reactionTextField.snp.bottom).offset(30)
             make.left.equalTo(view.snp.left).offset(18)
             make.right.equalTo(view.snp.right).offset(-18)
         }

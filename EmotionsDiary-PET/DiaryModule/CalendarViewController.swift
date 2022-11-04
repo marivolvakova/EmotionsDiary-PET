@@ -65,8 +65,10 @@ class CalendarViewController: UIViewController {
     @objc func controlDidChanged(_ segmentControl: UISegmentedControl) {
         if segmentControl.selectedSegmentIndex == 0 {
             calendarView?.calendar.setScope(.month, animated: true)
+            calendarView?.calendar.reloadData()
         } else if segmentControl.selectedSegmentIndex == 1 {
             calendarView?.calendar.setScope(.week, animated: true)
+            calendarView?.calendar.reloadData()
         }
     }
     
@@ -75,7 +77,9 @@ class CalendarViewController: UIViewController {
             calendarView?.calendar.isHidden = true
             calendarView?.lineView.isHidden = true
             calendarView?.titleLentaLabel.isHidden = false
+            calendarView?.tableView.sectionHeaderHeight = 1
             calendarView?.remakeTablViewConstraints()
+           
         } else if segmentControl.selectedSegmentIndex == 1 {
             calendarView?.calendar.isHidden = false
             calendarView?.lineView.isHidden = false
@@ -194,7 +198,7 @@ extension CalendarViewController: UITableViewDataSource {
                 daysEvents.append(event)
             }
         }
-        return daysEvents.count > 0 ? daysEvents.count : 2
+        return daysEvents.count > 0 ? daysEvents.count : 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -217,9 +221,8 @@ extension CalendarViewController: UITableViewDataSource {
             cell.backgroundColor = .white
             cell.selectionStyle = .blue
         } else {
-            cell.situationLable.text = "Создайте свою первую запись нажав на полюс в правом верхнем углу!"
+            cell.situationLable.text = "Создайте свою первую запись!"
         }
-
         return cell
     }
 }
@@ -228,10 +231,12 @@ extension CalendarViewController: UITableViewDataSource {
 extension CalendarViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 1
+        return 7
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "334fjgj"
+        let currentDate = Date().convertToString()
+        
+        return "\(currentDate)"
     }
 }

@@ -16,7 +16,7 @@ class NewEntryViewController: UIViewController {
     
     lazy var situationTextField = createTextFields(with: "Опишите ситуацию")
     lazy var thoughtsTextField = createTextFields(with: "Опишите Ваши мысли в момент ситуации")
-    lazy var emotionsTextField = createTextFields(with: "Какие эмоции Вы испытали?")
+    lazy var emotionsTextField = createTextFields(with: "Какие эмоции Вы испытали? Спросите себя: «Как мне то, что сейчас происходит? Что я чувствую в ответ на это?» Для помощи в поиске верного описания нажмите на кнопку инфо, из таблицы выберете несколько слов, которые лучше всего отражает ваше состояние")
     lazy var reactionTextField = createTextFields(with: "Какая у Вас была реакция?")
     
     lazy var situationLabel = createLabels(with: "Ситуация")
@@ -46,11 +46,19 @@ class NewEntryViewController: UIViewController {
         return button
     }()
     
-    lazy var reminderButton: UIButton = {
+//    lazy var reminderButton: UIButton = {
+//        let button = UIButton(type: .system)
+//        button.addTarget(self, action: #selector(closeView), for: .touchUpInside)
+//        button.setImage(UIImage(systemName: "info.circle.fill"), for: .normal)
+//        button.tintColor = .black
+//        return button
+//    }()
+    
+    lazy var emotionsInfoButton: UIButton = {
         let button = UIButton(type: .system)
         button.addTarget(self, action: #selector(closeView), for: .touchUpInside)
         button.setImage(UIImage(systemName: "info.circle.fill"), for: .normal)
-        button.tintColor = .black
+        button.tintColor = UIColor(red: 103 / 255, green: 112 / 255, blue: 241 / 255, alpha: 1)
         return button
     }()
 
@@ -72,6 +80,7 @@ class NewEntryViewController: UIViewController {
     func setupView() {
         view.backgroundColor = .secondarySystemBackground
         storageManager.makeStorage()
+        
     }
     
     // MARK: - Creation Images
@@ -120,10 +129,17 @@ class NewEntryViewController: UIViewController {
     }()
     
     @objc func closeView() {
+        CalendarView().tableView.reloadData()
         self.dismiss(animated: true)
     }
     
     @objc func saveEvent() {
+        
+        currentEvent.date = datePicker.date
+        currentEvent.emotions = emotionsTextField.text ?? ""
+        currentEvent.reaction = reactionTextField.text ?? ""
+        currentEvent.situation = situationTextField.text ?? ""
+        currentEvent.thoughts = thoughtsTextField.text ?? ""
         storageManager.addEvent(currentEvent)
         
         let alert = UIAlertController(title: "Ваша запись успешно сохранена",
@@ -132,6 +148,7 @@ class NewEntryViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Ok",
                                       style: .default,
                                       handler: {_ in
+            CalendarView().tableView.reloadData()
             self.dismiss(animated: true)
         }))
         self.present(alert, animated: true)
@@ -145,11 +162,14 @@ class NewEntryViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Удалить",
                                       style: .default,
                                       handler: {_ in
+
             self.storageManager.deleteEvent(self.currentEvent)
+            CalendarView().tableView.reloadData()
         }))
         alert.addAction(UIAlertAction(title: "Отмена",
                                       style: .cancel,
                                       handler: nil))
+        CalendarView().tableView.reloadData()
         self.present(alert, animated: true)
     }
     
@@ -166,6 +186,7 @@ class NewEntryViewController: UIViewController {
         view.addSubview(thoughtsLabel)
         view.addSubview(thoughtsTextField)
         view.addSubview(emotionsLabel)
+        view.addSubview(emotionsInfoButton)
         view.addSubview(emotionsTextField)
         view.addSubview(reactionLabel)
         view.addSubview(reactionTextField)
@@ -215,7 +236,11 @@ class NewEntryViewController: UIViewController {
         emotionsLabel.snp.makeConstraints { make in
             make.top.equalTo(thoughtsTextField.snp.bottom).offset(15)
             make.left.equalTo(view.snp.left).offset(18)
-            make.right.equalTo(view.snp.right).offset(-18)
+        }
+        emotionsInfoButton.snp.makeConstraints { make in
+            make.centerY.equalTo(emotionsLabel.snp.centerY)
+            make.left.equalTo(emotionsLabel.snp.right).offset(10)
+
         }
         emotionsTextField.snp.makeConstraints { make in
             make.top.equalTo(emotionsLabel.snp.bottom).offset(15)

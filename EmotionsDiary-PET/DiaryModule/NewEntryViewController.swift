@@ -9,10 +9,7 @@ import UIKit
 import SnapKit
 
 class NewEntryViewController: UIViewController {
-    
-    
-    var storageManager = StorageManager.shared
-    var currentEvent = Event()
+    var storageManager = StorageManager()
     
     lazy var situationTextField = createTextFields(with: "Опишите ситуацию")
     lazy var thoughtsTextField = createTextFields(with: "Опишите Ваши мысли в момент ситуации")
@@ -45,14 +42,6 @@ class NewEntryViewController: UIViewController {
         button.tintColor = .black
         return button
     }()
-    
-//    lazy var reminderButton: UIButton = {
-//        let button = UIButton(type: .system)
-//        button.addTarget(self, action: #selector(closeView), for: .touchUpInside)
-//        button.setImage(UIImage(systemName: "info.circle.fill"), for: .normal)
-//        button.tintColor = .black
-//        return button
-//    }()
     
     lazy var emotionsInfoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -134,13 +123,14 @@ class NewEntryViewController: UIViewController {
     }
     
     @objc func saveEvent() {
+        let newEvent = Event()
+        newEvent.date = datePicker.date
+        newEvent.emotions = emotionsTextField.text ?? ""
+        newEvent.reaction = reactionTextField.text ?? ""
+        newEvent.situation = situationTextField.text ?? ""
+        newEvent.thoughts = thoughtsTextField.text ?? ""
         
-        currentEvent.date = datePicker.date
-        currentEvent.emotions = emotionsTextField.text ?? ""
-        currentEvent.reaction = reactionTextField.text ?? ""
-        currentEvent.situation = situationTextField.text ?? ""
-        currentEvent.thoughts = thoughtsTextField.text ?? ""
-        storageManager.addEvent(currentEvent)
+        storageManager.addEvent(newEvent)
         
         let alert = UIAlertController(title: "Ваша запись успешно сохранена",
                                       message: "",
@@ -148,30 +138,33 @@ class NewEntryViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Ok",
                                       style: .default,
                                       handler: {_ in
-            CalendarView().tableView.reloadData()
+            
             self.dismiss(animated: true)
+            CalendarView().tableView.insertSections(IndexSet(integer: self.storageManager.items.count - 1), with: .bottom)
+            CalendarView().tableView.reloadData()
         }))
         self.present(alert, animated: true)
     }
     
-    @objc func deleteEvent() {
-        
-        let alert = UIAlertController(title: "Подтверждение удаления",
-                                      message: "Вы уверены, что хотите удалить запись?",
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Удалить",
-                                      style: .default,
-                                      handler: {_ in
-
-            self.storageManager.deleteEvent(self.currentEvent)
-            CalendarView().tableView.reloadData()
-        }))
-        alert.addAction(UIAlertAction(title: "Отмена",
-                                      style: .cancel,
-                                      handler: nil))
-        CalendarView().tableView.reloadData()
-        self.present(alert, animated: true)
-    }
+//    @objc func deleteEvent() {
+//
+//        let alert = UIAlertController(title: "Подтверждение удаления",
+//                                      message: "Вы уверены, что хотите удалить запись?",
+//                                      preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Удалить",
+//                                      style: .default,
+//                                      handler: {_ in
+//
+//            let
+//            self.storageManager.deleteEvent(self.currentEvent)
+//            CalendarView().tableView.reloadData()
+//        }))
+//        alert.addAction(UIAlertAction(title: "Отмена",
+//                                      style: .cancel,
+//                                      handler: nil))
+//        CalendarView().tableView.reloadData()
+//        self.present(alert, animated: true)
+//    }
     
     // MARK: - Hierarchy
     
@@ -212,7 +205,6 @@ class NewEntryViewController: UIViewController {
             make.width.equalTo(200)
             make.height.equalTo(30)
         }
-    
         situationLabel.snp.makeConstraints { make in
             make.top.equalTo(datePicker.snp.bottom).offset(20)
             make.left.equalTo(view.snp.left).offset(18)
@@ -258,7 +250,6 @@ class NewEntryViewController: UIViewController {
             make.left.equalTo(view.snp.left).offset(18)
             make.right.equalTo(view.snp.right).offset(-18)
         }
-        
         saveButton.snp.makeConstraints { make in
             make.top.equalTo(reactionTextField.snp.bottom).offset(30)
             make.left.equalTo(view.snp.left).offset(18)

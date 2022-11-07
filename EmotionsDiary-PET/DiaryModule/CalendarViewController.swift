@@ -18,12 +18,8 @@ class CalendarViewController: UIViewController {
         guard isViewLoaded else { return nil }
         return view as? CalendarView
     }
-    
-    private var model = [Event]()
-    
-    var storageManager = StorageManager.shared
-    
-    var selectedDate = Date()
+    var storageManager = StorageManager()
+    var selectedDate = Event().date
     
     // MARK: - Lifecycle
     
@@ -88,16 +84,6 @@ class CalendarViewController: UIViewController {
         }
     }
     
-    func eventsForDate(date: Date) -> [Event]  {
-        var daysEvents = [Event]()
-        for event in storageManager.items {
-            if Calendar.current.isDate(event.date, inSameDayAs: date) {
-                daysEvents.append(event)
-            }
-        }
-        return daysEvents
-    }
-    
     @objc func showSettings() {
         self.present(calendarView!.settingsView, animated: true)
     }
@@ -114,18 +100,15 @@ class CalendarViewController: UIViewController {
 // MARK: - FSCalendarDelegate
 
 extension CalendarViewController: FSCalendarDelegate {
-    
     public func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         print(date.convertToString())
         selectedDate = date
-        calendarView?.tableView.reloadData()
     }
 }
 
 // MARK: - FSCalendarDelegateAppearance
 
 extension CalendarViewController: FSCalendarDelegateAppearance {
-    
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
         calendarView?.remakeCalendarConstraints(bounds: bounds)
     }
@@ -133,7 +116,7 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
 
 extension CalendarViewController: FSCalendarDataSource {
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-var dates = [Date]()
+        var dates = [Date]()
         for event in storageManager.items {
             dates.append(event.date)
         }
@@ -190,14 +173,13 @@ var dates = [Date]()
 // MARK: - UITableViewDataSource
 
 extension CalendarViewController: UITableViewDataSource {
-    
     func numberOfSections(in tableView: UITableView) -> Int {
-        var daysEvents = [Event]()
-        for event in storageManager.items {
-            if Calendar.current.isDate(event.date, inSameDayAs: selectedDate) {
-                daysEvents.append(event)
-            }
+        let daysEvents = Event()
+        let days = daysEvents.where {
+            $0
         }
+        //storageManager.realm.objects(Event.self).filter("date = \(selectedDate.convertToString()), sele")
+
         return daysEvents.count > 0 ? daysEvents.count : 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -205,17 +187,10 @@ extension CalendarViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        var daysEvents = [Event]()
-        for event in storageManager.items {
-            if Calendar.current.isDate(event.date, inSameDayAs: selectedDate) {
-                daysEvents.append(event)
-            }
-        }
+        let daysEvents = storageManager.realm.objects(Event.self).filter("date = \(selectedDate.description)")
+
         let cell = tableView.dequeueReusableCell(withIdentifier: CalendarCell.identifier, for: indexPath) as! CalendarCell
-        
         if daysEvents.count > 0 {
-            cell.timeLable.text = daysEvents[indexPath.row].date.convertToString()
             cell.situationLable.text = daysEvents[indexPath.row].situation
             cell.emotionsLable.text = daysEvents[indexPath.row].emotions
             cell.backgroundColor = .white
@@ -227,31 +202,29 @@ extension CalendarViewController: UITableViewDataSource {
     }
 }
 
-
 extension CalendarViewController: UITableViewDelegate {
-
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 7
+        return 20
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let currentDate = Date().convertToString()
-        
-        return "\(currentDate)"
+        let daysEvents = storageManager.realm.objects(Event.self).filter("date = \(selectedDate)")
+        let currentDate = daysEvents[section].date.convertToString()
+        var returnValue = String()
+        daysEvents.isEmpty ? (returnValue = "") : (returnValue = "\(currentDate)")
+        return returnValue
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let daysEvents = storageManager.realm.objects(Event.self).filter("date = \(selectedDate)")
+
         if (editingStyle == .delete) {
-            
-            for event in storageManager.items {
-                if Calendar.current.isDate(event.date, inSameDayAs: selectedDate) {
-                    storageManager.deleteEvent(<#T##event: Event##Event#>)
-                }
-            
+            storageManager.deleteEvent(daysEvents[indexPath.row])
+            calendarView?.tableView.reloadData()
         }
     }
 }

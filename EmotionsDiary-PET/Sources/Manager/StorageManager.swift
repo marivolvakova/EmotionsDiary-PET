@@ -12,8 +12,6 @@ class StorageManager {
     let realm = try! Realm()
     var items: Results<Event>!
     
-    static let shared = StorageManager()
-    
     // MARK: - Обращание к хранилищу
     
     func makeStorage() {

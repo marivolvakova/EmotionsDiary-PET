@@ -10,6 +10,7 @@ import SnapKit
 
 class NewEntryViewController: UIViewController {
     var storageManager = StorageManager()
+    var calendarView = CalendarView()
     
     lazy var situationTextField = createTextFields(with: "Опишите ситуацию")
     lazy var thoughtsTextField = createTextFields(with: "Опишите Ваши мысли в момент ситуации")
@@ -69,7 +70,6 @@ class NewEntryViewController: UIViewController {
     func setupView() {
         view.backgroundColor = .secondarySystemBackground
         storageManager.makeStorage()
-        
     }
     
     // MARK: - Creation Images
@@ -118,7 +118,6 @@ class NewEntryViewController: UIViewController {
     }()
     
     @objc func closeView() {
-        CalendarView().tableView.reloadData()
         self.dismiss(animated: true)
     }
     
@@ -131,17 +130,20 @@ class NewEntryViewController: UIViewController {
         newEvent.thoughts = thoughtsTextField.text ?? ""
         
         storageManager.addEvent(newEvent)
+        calendarView.tableView.insertRows(at: [IndexPath(row: 0, section:  storageManager.items.count - 1)], with: .automatic)
+        
+        DispatchQueue.main.async {
+            self.calendarView.tableView.reloadData()
+        }
         
         let alert = UIAlertController(title: "Ваша запись успешно сохранена",
                                       message: "",
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok",
                                       style: .default,
-                                      handler: {_ in
-            
-            self.dismiss(animated: true)
-            CalendarView().tableView.insertSections(IndexSet(integer: self.storageManager.items.count - 1), with: .bottom)
-            CalendarView().tableView.reloadData()
+                                      handler: { [self]_ in
+            dismiss(animated: true)
+
         }))
         self.present(alert, animated: true)
     }
@@ -244,7 +246,6 @@ class NewEntryViewController: UIViewController {
             make.left.equalTo(view.snp.left).offset(18)
             make.right.equalTo(view.snp.right).offset(-18)
         }
-        
         reactionTextField.snp.makeConstraints { make in
             make.top.equalTo(reactionLabel.snp.bottom).offset(15)
             make.left.equalTo(view.snp.left).offset(18)

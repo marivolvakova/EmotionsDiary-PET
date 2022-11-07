@@ -20,6 +20,7 @@ class CalendarViewController: UIViewController {
     }
     var storageManager = StorageManager()
     var selectedDate = Event().date
+    var refreshControl = UIRefreshControl()
     
     // MARK: - Lifecycle
     
@@ -31,7 +32,6 @@ class CalendarViewController: UIViewController {
         super.viewDidLoad()
         calendarView?.tableView.reloadData()
         setupView()
-        storageManager.makeStorage()
     }
     
     // MARK: - Setup functions
@@ -54,9 +54,19 @@ class CalendarViewController: UIViewController {
         
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = rightBarButton
+        
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        calendarView?.tableView.addSubview(refreshControl)
     }
     
     // MARK: - Functions
+    
+    @objc func refresh(send: UIRefreshControl) {
+        DispatchQueue.main.async {
+            self.calendarView?.tableView.reloadData()
+            self.refreshControl.endRefreshing()
+        }
+    }
     
     @objc func controlDidChanged(_ segmentControl: UISegmentedControl) {
         if segmentControl.selectedSegmentIndex == 0 {
@@ -95,6 +105,16 @@ class CalendarViewController: UIViewController {
         modalController.sheetPresentationController?.prefersGrabberVisible = true
         present(modalController, animated: true)
     }
+    
+    func eventsForDate(date: Date) -> [Event]  {
+        var daysEvents = [Event]()
+        for event in storageManager.realm.objects(Event.self) {
+            if Calendar.current.isDate(event.date, inSameDayAs: date) {
+                daysEvents.append(event)
+            }
+        }
+        return daysEvents
+    }
 }
 
 // MARK: - FSCalendarDelegate
@@ -117,14 +137,14 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
 extension CalendarViewController: FSCalendarDataSource {
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
         var dates = [Date]()
-        for event in storageManager.items {
+        for event in storageManager.realm.objects(Event.self) {
             dates.append(event.date)
         }
-        
         if dates.contains(date) {
             return 1
+        } else {
+            return 0
         }
-        return 0
     }
 }
 //    func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
@@ -174,25 +194,24 @@ extension CalendarViewController: FSCalendarDataSource {
 
 extension CalendarViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        let daysEvents = Event()
-        let days = daysEvents.where {
-            $0
-        }
-        //storageManager.realm.objects(Event.self).filter("date = \(selectedDate.convertToString()), sele")
-
-        return daysEvents.count > 0 ? daysEvents.count : 1
+        
+        return eventsForDate(date: selectedDate).count > 0 ? eventsForDate(date: selectedDate).count : 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
+    /*
+    let tasks = realm.objects(Task.self)
+    let highPriorityTasks = tasks.filter("priority > 5")
+     */
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let daysEvents = storageManager.realm.objects(Event.self).filter("date = \(selectedDate.description)")
+        let daysEvents = eventsForDate(date: selectedDate)
 
         let cell = tableView.dequeueReusableCell(withIdentifier: CalendarCell.identifier, for: indexPath) as! CalendarCell
         if daysEvents.count > 0 {
-            cell.situationLable.text = daysEvents[indexPath.row].situation
-            cell.emotionsLable.text = daysEvents[indexPath.row].emotions
+            cell.situationLable.text = daysEvents[indexPath.section].situation
+            cell.emotionsLable.text = daysEvents[indexPath.section].emotions
             cell.backgroundColor = .white
             cell.selectionStyle = .blue
         } else {
@@ -208,10 +227,9 @@ extension CalendarViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let daysEvents = storageManager.realm.objects(Event.self).filter("date = \(selectedDate)")
-        let currentDate = daysEvents[section].date.convertToString()
+        let daysEvents = eventsForDate(date: selectedDate)
         var returnValue = String()
-        daysEvents.isEmpty ? (returnValue = "") : (returnValue = "\(currentDate)")
+        daysEvents.isEmpty ? (returnValue = "") : (returnValue = "\((daysEvents[section].date).convertToString())")
         return returnValue
     }
     
@@ -220,10 +238,10 @@ extension CalendarViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        let daysEvents = storageManager.realm.objects(Event.self).filter("date = \(selectedDate)")
-
-        if (editingStyle == .delete) {
-            storageManager.deleteEvent(daysEvents[indexPath.row])
+        let daysEvents = eventsForDate(date: selectedDate)
+        if (editingStyle == .delete) && eventsForDate(date: selectedDate).count != 0 {
+            storageManager.deleteEvent(daysEvents[indexPath.section])
+            //calendarView?.tableView.deleteRows(at: [IndexPath(row: 0, section: Int(UInt(indexPath.row)))], with: .automatic)
             calendarView?.tableView.reloadData()
         }
     }

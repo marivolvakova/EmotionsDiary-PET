@@ -19,6 +19,7 @@ class CalendarViewController: UIViewController {
         return view as? CalendarView
     }
     var storageManager = StorageManager()
+    var networkManager = NetworkManager.shared
     var selectedDate = Event().date
     var refreshControl = UIRefreshControl()
     
@@ -57,6 +58,9 @@ class CalendarViewController: UIViewController {
         
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         calendarView?.tableView.addSubview(refreshControl)
+        networkManager.fetchData()
+        calendarView?.quoteText.text = networkManager.randomQuoteText
+        calendarView?.quoteAuthor.text = networkManager.randomQuoteAuthor
     }
     
     // MARK: - Functions
@@ -194,29 +198,20 @@ extension CalendarViewController: FSCalendarDataSource {
 
 extension CalendarViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return eventsForDate(date: selectedDate).count > 0 ? eventsForDate(date: selectedDate).count : 1
+        return eventsForDate(date: selectedDate).count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    /*
-    let tasks = realm.objects(Task.self)
-    let highPriorityTasks = tasks.filter("priority > 5")
-     */
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let daysEvents = eventsForDate(date: selectedDate)
 
         let cell = tableView.dequeueReusableCell(withIdentifier: CalendarCell.identifier, for: indexPath) as! CalendarCell
-        if daysEvents.count > 0 {
             cell.situationLable.text = daysEvents[indexPath.section].situation
             cell.emotionsLable.text = daysEvents[indexPath.section].emotions
             cell.backgroundColor = .white
             cell.selectionStyle = .blue
-        } else {
-            cell.situationLable.text = "Создайте свою первую запись!"
-        }
         return cell
     }
 }

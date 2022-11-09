@@ -23,6 +23,8 @@
 		D6C54A4F290D4AEB004F3722 /* EmotionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A4E290D4AEB004F3722 /* EmotionsViewController.swift */; };
 		D6C54A51290D4B15004F3722 /* MistakesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A50290D4B15004F3722 /* MistakesViewController.swift */; };
 		D6C54A53290D4B31004F3722 /* NewEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A52290D4B31004F3722 /* NewEntryViewController.swift */; };
+		D6DD7E48291BC1C300D62FB3 /* Сделать.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DD7E47291BC1C300D62FB3 /* Сделать.swift */; };
+		D6DD7E4A291C3DD500D62FB3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DD7E49291C3DD500D62FB3 /* NetworkManager.swift */; };
 		D6E8719529119DA60058E83D /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E8719429119DA60058E83D /* CollectionView.swift */; };
 		D6E8719929119FB90058E83D /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E8719829119FB90058E83D /* SectionHeader.swift */; };
 		D6E8719B29119FDC0058E83D /* TypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E8719A29119FDC0058E83D /* TypeCell.swift */; };
@@ -45,6 +47,8 @@
 		D6C54A4E290D4AEB004F3722 /* EmotionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionsViewController.swift; sourceTree = "<group>"; };
 		D6C54A50290D4B15004F3722 /* MistakesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MistakesViewController.swift; sourceTree = "<group>"; };
 		D6C54A52290D4B31004F3722 /* NewEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryViewController.swift; sourceTree = "<group>"; };
+		D6DD7E47291BC1C300D62FB3 /* Сделать.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Сделать.swift"; sourceTree = "<group>"; };
+		D6DD7E49291C3DD500D62FB3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D6E8719429119DA60058E83D /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
 		D6E8719829119FB90058E83D /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		D6E8719A29119FDC0058E83D /* TypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCell.swift; sourceTree = "<group>"; };
@@ -91,6 +95,7 @@
 				D6E8719429119DA60058E83D /* CollectionView.swift */,
 				D6E8719829119FB90058E83D /* SectionHeader.swift */,
 				D6E8719A29119FDC0058E83D /* TypeCell.swift */,
+				D6DD7E47291BC1C300D62FB3 /* Сделать.swift */,
 			);
 			path = "EmotionsDiary-PET";
 			sourceTree = "<group>";
@@ -131,7 +136,7 @@
 				D6C54A50290D4B15004F3722 /* MistakesViewController.swift */,
 				D6C54A4E290D4AEB004F3722 /* EmotionsViewController.swift */,
 				D6E871A22911A0720058E83D /* Model */,
-				D6E871A12911A0630058E83D /* Manager */,
+				D6E871A12911A0630058E83D /* Managers */,
 				D6E871A02911A03E0058E83D /* App */,
 			);
 			path = Sources;
@@ -146,12 +151,13 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		D6E871A12911A0630058E83D /* Manager */ = {
+		D6E871A12911A0630058E83D /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				D651E52929105B3000C14438 /* StorageManager.swift */,
+				D6DD7E49291C3DD500D62FB3 /* NetworkManager.swift */,
 			);
-			path = Manager;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		D6E871A22911A0720058E83D /* Model */ = {
@@ -247,12 +253,14 @@
 				D6C54A53290D4B31004F3722 /* NewEntryViewController.swift in Sources */,
 				D6E8719B29119FDC0058E83D /* TypeCell.swift in Sources */,
 				D6C54A4C290D4A6E004F3722 /* Date+String.swift in Sources */,
+				D6DD7E4A291C3DD500D62FB3 /* NetworkManager.swift in Sources */,
 				D651E52A29105B3000C14438 /* StorageManager.swift in Sources */,
 				D6C54A2E290D3B6E004F3722 /* CalendarViewController.swift in Sources */,
 				D6C54A2A290D3B6E004F3722 /* AppDelegate.swift in Sources */,
 				D6C54A3F290D4237004F3722 /* DiaryView.swift in Sources */,
 				D6C54A51290D4B15004F3722 /* MistakesViewController.swift in Sources */,
 				D6C54A4F290D4AEB004F3722 /* EmotionsViewController.swift in Sources */,
+				D6DD7E48291BC1C300D62FB3 /* Сделать.swift in Sources */,
 				D6C54A2C290D3B6E004F3722 /* SceneDelegate.swift in Sources */,
 				D6E8719529119DA60058E83D /* CollectionView.swift in Sources */,
 				D6C54A47290D42AE004F3722 /* CalendarCell.swift in Sources */,

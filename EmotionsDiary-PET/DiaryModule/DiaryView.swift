@@ -13,6 +13,7 @@ class CalendarView: UIView {
     // MARK: - Properties
     
     lazy var formatter = DateFormatter()
+    var networkManager = NetworkManager.shared
     
     let settingsView: UIViewController = {
         let view = UIViewController()
@@ -42,6 +43,32 @@ class CalendarView: UIView {
         return label
     }()
     
+    lazy var quoteText: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = .preferredFont(forTextStyle: .footnote)
+        label.clipsToBounds = true
+        return label
+    }()
+    lazy var quoteAuthor: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = .preferredFont(forTextStyle: .footnote)
+        label.clipsToBounds = true
+        return label
+    }()
+    
+    lazy var quoateButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.tintColor = .white
+        button.backgroundColor = .systemBlue
+        return button
+    }()
+    
+    
     lazy var toggle = UISwitch()
     
     lazy var calendarViewLable: UILabel = {
@@ -55,7 +82,6 @@ class CalendarView: UIView {
     
     lazy var closeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(closeView), for: .touchUpInside)
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
         button.tintColor = .black
@@ -64,6 +90,10 @@ class CalendarView: UIView {
     
     @objc func closeView() {
         settingsView.dismiss(animated: true)
+    }
+    
+    @objc private func buttonPressed() {
+        networkManager.fetchData()
     }
     
     lazy var segmentControl: UISegmentedControl = {
@@ -147,6 +177,9 @@ class CalendarView: UIView {
         addSubview(lineView)
         addSubview(tableView)
         addSubview(titleLentaLabel)
+        addSubview(quoteText)
+        addSubview(quoteAuthor)
+        addSubview(quoateButton)
         
         settingsView.view.addSubview(closeButton)
         settingsView.view.addSubview(calendarViewLable)
@@ -180,6 +213,26 @@ class CalendarView: UIView {
             make.centerX.equalTo(settingsView.view.snp.centerX)
         }
         
+        
+        quoteText.snp.makeConstraints { make in
+            make.top.equalTo(calendar.snp.bottom).offset(15)
+            make.left.equalTo(snp.left).offset(20)
+            make.right.equalTo(snp.right).offset(-20)
+            make.height.equalTo(70)
+        }
+        quoteAuthor.snp.makeConstraints { make in
+            make.top.equalTo(quoteText.snp.bottom).offset(5)
+            make.left.equalTo(snp.left).offset(20)
+            make.right.equalTo(snp.right).offset(-20)
+            make.height.equalTo(70)
+        }
+        quoateButton.snp.makeConstraints { make in
+            make.top.equalTo(quoteText.snp.top)
+            make.right.equalTo(snp.right).offset(-5)
+            make.height.equalTo(20)
+            make.width.equalTo(13)
+        }
+        
         calendar.snp.makeConstraints { make in
             make.top.equalTo(snp.top).offset(50)
             make.left.equalTo(snp.left).offset(5)
@@ -192,13 +245,14 @@ class CalendarView: UIView {
             make.left.equalTo(snp.left)
             make.right.equalTo(snp.right)
         }
+        
         titleLentaLabel.snp.makeConstraints { make in
             make.top.equalTo(snp.top).offset(60)
             make.centerX.equalTo(snp.centerX)
         }
 
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(calendar.snp.bottom).offset(30)
+            make.top.equalTo(quoteAuthor.snp.bottom).offset(10)
             make.left.equalTo(snp.left)
             make.right.equalTo(snp.right)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-15)
@@ -224,7 +278,7 @@ class CalendarView: UIView {
             }
         } else if mainSegmentControl.selectedSegmentIndex == 1 {
             tableView.snp.remakeConstraints { make in
-                make.top.equalTo(calendar.snp.bottom).offset(30)
+                make.top.equalTo(quoteAuthor.snp.bottom).offset(10)
                 make.left.equalTo(snp.left)
                 make.right.equalTo(snp.right)
                 make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-15)

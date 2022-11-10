@@ -1,12 +1,21 @@
 {
   "pins" : [
     {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "bdecb2c87a21a236dcfe88b21532ad3f0e3d20f4"
+      }
+    },
+    {
       "identity" : "fscalendar",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/WenchaoD/FSCalendar.git",
       "state" : {
         "branch" : "master",
-        "revision" : "16cbee1fc37b8ff21d6a1b38ae2030441055493b"
+        "revision" : "76afe5087f3ba0974d6e3ec9121c5e7f0d342f28"
       }
     },
     {
@@ -24,7 +33,7 @@
       "location" : "https://github.com/realm/realm-swift.git",
       "state" : {
         "branch" : "master",
-        "revision" : "cedc1c8b0b2ab8506dd15703c36f8c0660774b18"
+        "revision" : "acf43faaed3109922211d1e261348a2c60dbcbde"
       }
     },
     {
@@ -33,7 +42,7 @@
       "location" : "https://github.com/SnapKit/SnapKit.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "07c5d1f6044701d97e94dc11157259e8811977be"
+        "revision" : "58320fe80522414bf3a7e24c88123581dc586752"
       }
     }
   ],

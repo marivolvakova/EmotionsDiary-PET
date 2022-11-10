@@ -18,9 +18,9 @@ class CalendarView: UIView {
     let settingsView: UIViewController = {
         let view = UIViewController()
         view.modalPresentationStyle = .pageSheet
-        view.sheetPresentationController?.detents = [.medium()]
-        view.sheetPresentationController?.prefersGrabberVisible = true
-        view.sheetPresentationController?.prefersScrollingExpandsWhenScrolledToEdge = false
+//        view.sheetPresentationController?.detents = [.medium()]
+//        view.sheetPresentationController?.prefersGrabberVisible = true
+//        view.sheetPresentationController?.prefersScrollingExpandsWhenScrolledToEdge = false
         view.view.backgroundColor = .white
         return view
     }()

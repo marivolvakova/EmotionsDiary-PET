@@ -8,6 +8,7 @@
 import UIKit
 import FSCalendar
 import SnapKit
+import Alamofire
 
 
 class CalendarViewController: UIViewController {
@@ -59,8 +60,8 @@ class CalendarViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         calendarView?.tableView.addSubview(refreshControl)
         networkManager.fetchData()
-        calendarView?.quoteText.text = networkManager.randomQuoteText
-        calendarView?.quoteAuthor.text = networkManager.randomQuoteAuthor
+        calendarView?.quoteText.text = networkManager.randomQuote?[0].quote
+        calendarView?.quoteAuthor.text = networkManager.randomQuote?[0].author
     }
     
     // MARK: - Functions
@@ -105,8 +106,8 @@ class CalendarViewController: UIViewController {
     @objc func makeNewEntry() {
         let modalController = NewEntryViewController()
         modalController.modalPresentationStyle = .formSheet
-        modalController.sheetPresentationController?.detents = [.large()]
-        modalController.sheetPresentationController?.prefersGrabberVisible = true
+//        modalController.sheetPresentationController?.detents = [.large()]
+//        modalController.sheetPresentationController?.prefersGrabberVisible = true
         present(modalController, animated: true)
     }
     

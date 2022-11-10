@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -29,6 +29,7 @@
 		D6E8719929119FB90058E83D /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E8719829119FB90058E83D /* SectionHeader.swift */; };
 		D6E8719B29119FDC0058E83D /* TypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E8719A29119FDC0058E83D /* TypeCell.swift */; };
 		D6E871A42911A0860058E83D /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E871A32911A0860058E83D /* Event.swift */; };
+		D6EC43CD291D878D005FC556 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D6EC43CC291D878D005FC556 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D60CF17F29106BCF005A322C /* RealmSwift in Frameworks */,
+				D6EC43CD291D878D005FC556 /* Alamofire in Frameworks */,
 				D6C54A42290D425B004F3722 /* SnapKit in Frameworks */,
 				D6C54A45290D4269004F3722 /* FSCalendar in Frameworks */,
 			);
@@ -188,6 +190,7 @@
 				D6C54A41290D425B004F3722 /* SnapKit */,
 				D6C54A44290D4269004F3722 /* FSCalendar */,
 				D60CF17E29106BCF005A322C /* RealmSwift */,
+				D6EC43CC291D878D005FC556 /* Alamofire */,
 			);
 			productName = "EmotionsDiary-PET";
 			productReference = D6C54A26290D3B6E004F3722 /* EmotionsDiary-PET.app */;
@@ -209,7 +212,7 @@
 				};
 			};
 			buildConfigurationList = D6C54A21290D3B6E004F3722 /* Build configuration list for PBXProject "EmotionsDiary-PET" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -221,6 +224,7 @@
 				D6C54A40290D425B004F3722 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				D6C54A43290D4269004F3722 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 				D60CF17D29106BCF005A322C /* XCRemoteSwiftPackageReference "realm-swift" */,
+				D6EC43CB291D878C005FC556 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = D6C54A27290D3B6E004F3722 /* Products */;
 			projectDirPath = "";
@@ -340,7 +344,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -394,7 +398,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -508,6 +512,14 @@
 				kind = branch;
 			};
 		};
+		D6EC43CB291D878C005FC556 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -525,6 +537,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D6C54A43290D4269004F3722 /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
+		};
+		D6EC43CC291D878D005FC556 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D6EC43CB291D878C005FC556 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

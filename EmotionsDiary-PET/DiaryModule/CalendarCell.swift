@@ -44,8 +44,6 @@ class CalendarCell: UITableViewCell {
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
         stackView.alignment = .leading
-
-
         return stackView
     }()
     

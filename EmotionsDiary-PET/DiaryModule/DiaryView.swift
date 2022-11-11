@@ -30,7 +30,6 @@ class CalendarView: UIView {
         view.backgroundColor = .systemGray
         view.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         view.layer.masksToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -48,7 +47,10 @@ class CalendarView: UIView {
         label.textColor = .black
         label.textAlignment = .center
         label.font = .preferredFont(forTextStyle: .footnote)
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
         label.clipsToBounds = true
+        label.sizeToFit()
         return label
     }()
     lazy var quoteAuthor: UILabel = {
@@ -60,14 +62,13 @@ class CalendarView: UIView {
         return label
     }()
     
-    lazy var quoateButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        button.tintColor = .white
-        button.backgroundColor = .systemBlue
-        return button
+    lazy var quoateView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray
+        view.layer.cornerRadius = 15
+        view.layer.masksToBounds = true
+        return view
     }()
-    
     
     lazy var toggle = UISwitch()
     
@@ -177,9 +178,9 @@ class CalendarView: UIView {
         addSubview(lineView)
         addSubview(tableView)
         addSubview(titleLentaLabel)
-        addSubview(quoteText)
-        addSubview(quoteAuthor)
-        addSubview(quoateButton)
+        addSubview(quoateView)
+        quoateView.addSubview(quoteText)
+        quoateView.addSubview(quoteAuthor)
         
         settingsView.view.addSubview(closeButton)
         settingsView.view.addSubview(calendarViewLable)
@@ -212,25 +213,27 @@ class CalendarView: UIView {
             make.height.equalTo(35)
             make.centerX.equalTo(settingsView.view.snp.centerX)
         }
-        
-        
-        quoteText.snp.makeConstraints { make in
-            make.top.equalTo(calendar.snp.bottom).offset(15)
+        lineView.snp.makeConstraints { make in
+            make.top.equalTo(calendar.snp.bottom).offset(5)
+            make.left.equalTo(snp.left)
+            make.right.equalTo(snp.right)
+        }
+        quoateView.snp.makeConstraints { make in
+            make.top.equalTo(lineView.snp.bottom).offset(10)
             make.left.equalTo(snp.left).offset(20)
             make.right.equalTo(snp.right).offset(-20)
+            make.height.equalTo(95)
+        }
+        quoteText.snp.makeConstraints { make in
+            make.top.equalTo(quoateView.snp.top).offset(1)
+            make.left.equalTo(quoateView.snp.left).offset(10)
+            make.right.equalTo(quoateView.snp.right).offset(-10)
             make.height.equalTo(70)
         }
         quoteAuthor.snp.makeConstraints { make in
-            make.top.equalTo(quoteText.snp.bottom).offset(5)
-            make.left.equalTo(snp.left).offset(20)
-            make.right.equalTo(snp.right).offset(-20)
-            make.height.equalTo(70)
-        }
-        quoateButton.snp.makeConstraints { make in
-            make.top.equalTo(quoteText.snp.top)
-            make.right.equalTo(snp.right).offset(-5)
+            make.top.equalTo(quoteText.snp.bottom).offset(2)
+            make.centerX.equalTo(quoateView.snp.centerX)
             make.height.equalTo(20)
-            make.width.equalTo(13)
         }
         
         calendar.snp.makeConstraints { make in
@@ -240,19 +243,13 @@ class CalendarView: UIView {
             make.height.equalTo(250)
         }
         
-        lineView.snp.makeConstraints { make in
-            make.top.equalTo(tableView.snp.top).offset(-20)
-            make.left.equalTo(snp.left)
-            make.right.equalTo(snp.right)
-        }
-        
         titleLentaLabel.snp.makeConstraints { make in
             make.top.equalTo(snp.top).offset(60)
             make.centerX.equalTo(snp.centerX)
         }
 
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(quoteAuthor.snp.bottom).offset(10)
+            make.top.equalTo(quoateView.snp.bottom).offset(10)
             make.left.equalTo(snp.left)
             make.right.equalTo(snp.right)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-15)

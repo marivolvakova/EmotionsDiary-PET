@@ -24,6 +24,7 @@ class CalendarViewController: UIViewController {
     var selectedDate = Event().date
     var refreshControl = UIRefreshControl()
     
+    
     // MARK: - Lifecycle
     
     override func loadView() {
@@ -60,8 +61,13 @@ class CalendarViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         calendarView?.tableView.addSubview(refreshControl)
         networkManager.fetchData()
-        calendarView?.quoteText.text = networkManager.randomQuote?[0].quote
-        calendarView?.quoteAuthor.text = networkManager.randomQuote?[0].author
+        
+        
+        let value = networkManager.randomQuote?.randomElement()
+        calendarView?.quoteText.text = value?.text
+        calendarView?.quoteAuthor.text = value?.author
+        
+
     }
     
     // MARK: - Functions
@@ -104,11 +110,10 @@ class CalendarViewController: UIViewController {
     }
     
     @objc func makeNewEntry() {
-        let modalController = NewEntryViewController()
-        modalController.modalPresentationStyle = .formSheet
-//        modalController.sheetPresentationController?.detents = [.large()]
-//        modalController.sheetPresentationController?.prefersGrabberVisible = true
-        present(modalController, animated: true)
+        let filterVC = FilterViewController()
+        filterVC.modalPresentationStyle = .custom
+        filterVC.transitioningDelegate = self
+        self.present(filterVC, animated: true, completion: nil)
     }
     
     func eventsForDate(date: Date) -> [Event]  {
@@ -240,5 +245,13 @@ extension CalendarViewController: UITableViewDelegate {
             //calendarView?.tableView.deleteRows(at: [IndexPath(row: 0, section: Int(UInt(indexPath.row)))], with: .automatic)
             calendarView?.tableView.reloadData()
         }
+    }
+}
+
+
+extension CalendarViewController: UIViewControllerTransitioningDelegate {
+    // 2.
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        FilterPresentationController(presentedViewController: presented, presenting: presenting)
     }
 }

@@ -15,16 +15,6 @@ class CalendarView: UIView {
     lazy var formatter = DateFormatter()
     var networkManager = NetworkManager.shared
     
-    let settingsView: UIViewController = {
-        let view = UIViewController()
-        view.modalPresentationStyle = .pageSheet
-//        view.sheetPresentationController?.detents = [.medium()]
-//        view.sheetPresentationController?.prefersGrabberVisible = true
-//        view.sheetPresentationController?.prefersScrollingExpandsWhenScrolledToEdge = false
-        view.view.backgroundColor = .white
-        return view
-    }()
-    
     lazy var lineView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray
@@ -72,46 +62,15 @@ class CalendarView: UIView {
     
     lazy var toggle = UISwitch()
     
-    lazy var calendarViewLable: UILabel = {
-        let label = UILabel()
-        label.text = "Отображение"
-        label.textColor = .secondaryLabel
-        label.font = .preferredFont(forTextStyle: .subheadline)
-        label.textColor = .black
-        return label
-    }()
+
     
-    lazy var closeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.addTarget(self, action: #selector(closeView), for: .touchUpInside)
-        button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.tintColor = .black
-        return button
-    }()
-    
-    @objc func closeView() {
-        settingsView.dismiss(animated: true)
-    }
+
     
     @objc private func buttonPressed() {
         networkManager.fetchData()
     }
     
-    lazy var segmentControl: UISegmentedControl = {
-        let segmentControl = UISegmentedControl(items: ["Месяц", "Неделя"])
-        segmentControl.selectedSegmentTintColor = UIColor(red: 103 / 255, green: 112 / 255, blue: 241 / 255, alpha: 1)
-        segmentControl.backgroundColor = .systemGroupedBackground
-        segmentControl.selectedSegmentIndex = 1
-        return segmentControl
-    }()
-    
-    lazy var mainSegmentControl: UISegmentedControl = {
-        let segmentControl = UISegmentedControl(items: ["Лента", "Календарь"])
-        segmentControl.selectedSegmentTintColor = UIColor(red: 103 / 255, green: 112 / 255, blue: 241 / 255, alpha: 1)
-        segmentControl.backgroundColor = .systemGroupedBackground
-        segmentControl.selectedSegmentIndex = 1
-        return segmentControl
-    }()
+
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
@@ -181,38 +140,10 @@ class CalendarView: UIView {
         addSubview(quoateView)
         quoateView.addSubview(quoteText)
         quoateView.addSubview(quoteAuthor)
-        
-        settingsView.view.addSubview(closeButton)
-        settingsView.view.addSubview(calendarViewLable)
-        settingsView.view.addSubview(segmentControl)
-        
-        settingsView.view.addSubview(mainSegmentControl)
-        
     }
     
     func setupLayout() {
-        calendarViewLable.snp.makeConstraints { make in
-            make.top.equalTo(settingsView.view.safeAreaLayoutGuide.snp.top).offset(50)
-            make.left.equalTo(settingsView.view.snp.left).offset(20)
-        }
         
-        closeButton.snp.makeConstraints { make in
-            make.top.equalTo(settingsView.view.safeAreaLayoutGuide.snp.top).offset(20)
-            make.right.equalTo(settingsView.view.snp.right).offset(-20)
-        }
-        
-        segmentControl.snp.makeConstraints { make in
-            make.top.equalTo(calendarViewLable.snp.bottom).offset(15)
-            make.width.equalTo(350)
-            make.height.equalTo(35)
-            make.centerX.equalTo(settingsView.view.snp.centerX)
-        }
-        mainSegmentControl.snp.makeConstraints { make in
-            make.top.equalTo(segmentControl.snp.bottom).offset(15)
-            make.width.equalTo(350)
-            make.height.equalTo(35)
-            make.centerX.equalTo(settingsView.view.snp.centerX)
-        }
         lineView.snp.makeConstraints { make in
             make.top.equalTo(calendar.snp.bottom).offset(5)
             make.left.equalTo(snp.left)
@@ -266,14 +197,14 @@ class CalendarView: UIView {
     }
     
     func remakeTablViewConstraints() {
-        if mainSegmentControl.selectedSegmentIndex == 0 {
+        if SettingsViewController().mainSegmentControl.selectedSegmentIndex == 0 {
             tableView.snp.remakeConstraints { make in
                 make.top.equalTo(titleLentaLabel.snp.bottom).offset(15)
                 make.left.equalTo(snp.left)
                 make.right.equalTo(snp.right)
                 make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-15)
             }
-        } else if mainSegmentControl.selectedSegmentIndex == 1 {
+        } else if SettingsViewController().mainSegmentControl.selectedSegmentIndex == 1 {
             tableView.snp.remakeConstraints { make in
                 make.top.equalTo(quoteAuthor.snp.bottom).offset(10)
                 make.left.equalTo(snp.left)

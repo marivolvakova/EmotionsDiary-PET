@@ -42,9 +42,7 @@ class CalendarViewController: UIViewController {
     private func setupView() {
         calendarView?.tableView.dataSource = self
         calendarView?.tableView.delegate = self
-        calendarView?.segmentControl.addTarget(self, action: #selector(controlDidChanged(_:)), for: .valueChanged)
-        
-        calendarView?.mainSegmentControl.addTarget(self, action: #selector(mainControlDidChanged(_:)), for: .valueChanged)
+
         
         calendarView?.calendar.delegate = self
         calendarView?.calendar.dataSource = self
@@ -68,6 +66,9 @@ class CalendarViewController: UIViewController {
         calendarView?.quoteAuthor.text = value?.author
         
 
+        SettingsViewController().segmentControl.addTarget(SettingsViewController(), action: #selector(controlDidChanged(_:)), for: .valueChanged)
+        
+        SettingsViewController().mainSegmentControl.addTarget(SettingsViewController(), action: #selector(mainControlDidChanged(_:)), for: .valueChanged)
     }
     
     // MARK: - Functions
@@ -78,42 +79,42 @@ class CalendarViewController: UIViewController {
             self.refreshControl.endRefreshing()
         }
     }
-    
     @objc func controlDidChanged(_ segmentControl: UISegmentedControl) {
-        if segmentControl.selectedSegmentIndex == 0 {
+        if SettingsViewController().segmentControl.selectedSegmentIndex == 0 {
             calendarView?.calendar.setScope(.month, animated: true)
             calendarView?.calendar.reloadData()
-        } else if segmentControl.selectedSegmentIndex == 1 {
+        } else if SettingsViewController().segmentControl.selectedSegmentIndex == 1 {
             calendarView?.calendar.setScope(.week, animated: true)
             calendarView?.calendar.reloadData()
         }
     }
     
     @objc func mainControlDidChanged(_ segmentControl: UISegmentedControl) {
-        if segmentControl.selectedSegmentIndex == 0 {
+        if SettingsViewController().segmentControl.selectedSegmentIndex == 0 {
             calendarView?.calendar.isHidden = true
             calendarView?.lineView.isHidden = true
             calendarView?.titleLentaLabel.isHidden = false
             calendarView?.tableView.sectionHeaderHeight = 1
             calendarView?.remakeTablViewConstraints()
            
-        } else if segmentControl.selectedSegmentIndex == 1 {
+        } else if SettingsViewController().segmentControl.selectedSegmentIndex == 1 {
             calendarView?.calendar.isHidden = false
             calendarView?.lineView.isHidden = false
             calendarView?.titleLentaLabel.isHidden = true
             calendarView?.remakeTablViewConstraints()
         }
     }
+
     
     @objc func showSettings() {
-        self.present(calendarView!.settingsView, animated: true)
+        let viewControllerToShow = SettingsViewController()
+        viewControllerToShow.modalPresentationStyle = .custom
+        viewControllerToShow.transitioningDelegate = self
+        self.present(viewControllerToShow, animated: true, completion: nil)
     }
     
     @objc func makeNewEntry() {
-        let filterVC = FilterViewController()
-        filterVC.modalPresentationStyle = .custom
-        filterVC.transitioningDelegate = self
-        self.present(filterVC, animated: true, completion: nil)
+        self.present(NewEntryViewController(), animated: true)
     }
     
     func eventsForDate(date: Date) -> [Event]  {
@@ -250,8 +251,7 @@ extension CalendarViewController: UITableViewDelegate {
 
 
 extension CalendarViewController: UIViewControllerTransitioningDelegate {
-    // 2.
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        FilterPresentationController(presentedViewController: presented, presenting: presenting)
+        SettingsPresentationController(presentedViewController: presented, presenting: presenting)
     }
 }

@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		D60CF17F29106BCF005A322C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D60CF17E29106BCF005A322C /* RealmSwift */; };
 		D633C185291E6D8C00B53792 /* quotes.json in Resources */ = {isa = PBXBuildFile; fileRef = D633C184291E6D8C00B53792 /* quotes.json */; };
-		D633C188291E8FAB00B53792 /* PresentdtionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D633C187291E8FAB00B53792 /* PresentdtionController.swift */; };
+		D633C188291E8FAB00B53792 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D633C187291E8FAB00B53792 /* SettingsViewController.swift */; };
 		D651E52A29105B3000C14438 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D651E52929105B3000C14438 /* StorageManager.swift */; };
+		D6890A73291F87C100CB11F6 /* SettingsPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6890A72291F87C100CB11F6 /* SettingsPresentationController.swift */; };
 		D6C54A2A290D3B6E004F3722 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A29290D3B6E004F3722 /* AppDelegate.swift */; };
 		D6C54A2C290D3B6E004F3722 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A2B290D3B6E004F3722 /* SceneDelegate.swift */; };
 		D6C54A2E290D3B6E004F3722 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C54A2D290D3B6E004F3722 /* CalendarViewController.swift */; };
@@ -36,8 +37,9 @@
 
 /* Begin PBXFileReference section */
 		D633C184291E6D8C00B53792 /* quotes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = quotes.json; sourceTree = "<group>"; };
-		D633C187291E8FAB00B53792 /* PresentdtionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentdtionController.swift; sourceTree = "<group>"; };
+		D633C187291E8FAB00B53792 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D651E52929105B3000C14438 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		D6890A72291F87C100CB11F6 /* SettingsPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresentationController.swift; sourceTree = "<group>"; };
 		D6C54A26290D3B6E004F3722 /* EmotionsDiary-PET.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EmotionsDiary-PET.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C54A29290D3B6E004F3722 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6C54A2B290D3B6E004F3722 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,7 +80,8 @@
 		D633C186291E8F8700B53792 /* PresentationController */ = {
 			isa = PBXGroup;
 			children = (
-				D633C187291E8FAB00B53792 /* PresentdtionController.swift */,
+				D633C187291E8FAB00B53792 /* SettingsViewController.swift */,
+				D6890A72291F87C100CB11F6 /* SettingsPresentationController.swift */,
 			);
 			path = PresentationController;
 			sourceTree = "<group>";
@@ -270,12 +273,13 @@
 			files = (
 				D6E871A42911A0860058E83D /* Event.swift in Sources */,
 				D6C54A53290D4B31004F3722 /* NewEntryViewController.swift in Sources */,
-				D633C188291E8FAB00B53792 /* PresentdtionController.swift in Sources */,
+				D633C188291E8FAB00B53792 /* SettingsViewController.swift in Sources */,
 				D6E8719B29119FDC0058E83D /* TypeCell.swift in Sources */,
 				D6C54A4C290D4A6E004F3722 /* Date+String.swift in Sources */,
 				D6DD7E4A291C3DD500D62FB3 /* NetworkManager.swift in Sources */,
 				D651E52A29105B3000C14438 /* StorageManager.swift in Sources */,
 				D6C54A2E290D3B6E004F3722 /* CalendarViewController.swift in Sources */,
+				D6890A73291F87C100CB11F6 /* SettingsPresentationController.swift in Sources */,
 				D6C54A2A290D3B6E004F3722 /* AppDelegate.swift in Sources */,
 				D6C54A3F290D4237004F3722 /* DiaryView.swift in Sources */,
 				D6C54A51290D4B15004F3722 /* MistakesViewController.swift in Sources */,

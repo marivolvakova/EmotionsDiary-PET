@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D60CF17F29106BCF005A322C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D60CF17E29106BCF005A322C /* RealmSwift */; };
+		D631D90229263F2900CD1354 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D631D90129263F2900CD1354 /* TabBarController.swift */; };
 		D633C185291E6D8C00B53792 /* quotes.json in Resources */ = {isa = PBXBuildFile; fileRef = D633C184291E6D8C00B53792 /* quotes.json */; };
 		D633C188291E8FAB00B53792 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D633C187291E8FAB00B53792 /* SettingsViewController.swift */; };
 		D651E52A29105B3000C14438 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D651E52929105B3000C14438 /* StorageManager.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D631D90129263F2900CD1354 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		D633C184291E6D8C00B53792 /* quotes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = quotes.json; sourceTree = "<group>"; };
 		D633C187291E8FAB00B53792 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D651E52929105B3000C14438 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			children = (
 				D6C54A29290D3B6E004F3722 /* AppDelegate.swift */,
 				D6C54A2B290D3B6E004F3722 /* SceneDelegate.swift */,
+				D631D90129263F2900CD1354 /* TabBarController.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				D6C54A3F290D4237004F3722 /* DiaryView.swift in Sources */,
 				D6C54A51290D4B15004F3722 /* MistakesViewController.swift in Sources */,
 				D6F0E12B29250CF8005E760C /* ViewController.swift in Sources */,
+				D631D90229263F2900CD1354 /* TabBarController.swift in Sources */,
 				D6C54A4F290D4AEB004F3722 /* EmotionsViewController.swift in Sources */,
 				D6DD7E48291BC1C300D62FB3 /* Сделать.swift in Sources */,
 				D6C54A2C290D3B6E004F3722 /* SceneDelegate.swift in Sources */,

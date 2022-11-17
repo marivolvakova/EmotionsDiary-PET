@@ -114,7 +114,8 @@ class CalendarViewController: UIViewController {
     }
     
     @objc func makeNewEntry() {
-        self.present(NewEntryViewController(), animated: true)
+        //self.present(NewEntryViewController(), animated: true)
+        SceneDelegate.shared.changeViewController(viewController: NewEntryView(), animationOptions: .transitionCrossDissolve)
     }
     
     func eventsForDate(date: Date) -> [Event]  {

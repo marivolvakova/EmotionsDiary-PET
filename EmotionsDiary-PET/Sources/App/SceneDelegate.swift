@@ -8,12 +8,8 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
     var window: UIWindow?
-
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-
         guard (scene is UIWindowScene) else { return }
         let tabBarController = UITabBarController()
         let diaryViewController = CalendarViewController()
@@ -22,19 +18,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         emotionsViewController.tabBarItem = UITabBarItem(title: "Эмоции", image: UIImage(systemName: "heart.text.square.fill"), tag: 1)
         let mistakesViewController = MistakesViewController()
         mistakesViewController.tabBarItem = UITabBarItem(title: "Когнетивные ошибки", image: UIImage(systemName: "square.stack.fill"), tag: 2)
-        let controllers = [
-            diaryViewController,
-            emotionsViewController,
-            mistakesViewController
-            ]
+        let controllers = [diaryViewController,
+                           emotionsViewController,
+                           mistakesViewController]
         tabBarController.viewControllers = controllers.map { UINavigationController(rootViewController: $0)}
         window?.rootViewController = tabBarController
         
-//        let nav = UINavigationController(rootViewController: CollectionViewController())
-//
-//        window?.rootViewController = nav
-        
         window?.makeKeyAndVisible()
+    }
+    func changeViewController(viewController: UIViewController, animated: Bool = true, animationOptions: UIView.AnimationOptions) {
+        guard let window = window else { return }
+        window.rootViewController = viewController
+        let options: UIView.AnimationOptions = [animationOptions]
+        UIView.transition(with: window, duration: 0.3, options: options, animations: nil, completion: nil)
     }
 }
 
+extension SceneDelegate {
+    static var shared: SceneDelegate {
+        return (UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate)
+    }
+}

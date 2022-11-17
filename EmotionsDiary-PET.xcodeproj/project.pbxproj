@@ -33,6 +33,9 @@
 		D6E8719B29119FDC0058E83D /* TypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E8719A29119FDC0058E83D /* TypeCell.swift */; };
 		D6E871A42911A0860058E83D /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E871A32911A0860058E83D /* Event.swift */; };
 		D6EC43CD291D878D005FC556 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D6EC43CC291D878D005FC556 /* Alamofire */; };
+		D6F0E12929250CE0005E760C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F0E12829250CE0005E760C /* Model.swift */; };
+		D6F0E12B29250CF8005E760C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F0E12A29250CF8005E760C /* ViewController.swift */; };
+		D6F0E12D29250D16005E760C /* ViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F0E12C29250D16005E760C /* ViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +63,9 @@
 		D6E8719829119FB90058E83D /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		D6E8719A29119FDC0058E83D /* TypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCell.swift; sourceTree = "<group>"; };
 		D6E871A32911A0860058E83D /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		D6F0E12829250CE0005E760C /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		D6F0E12A29250CF8005E760C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D6F0E12C29250D16005E760C /* ViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +111,7 @@
 		D6C54A28290D3B6E004F3722 /* EmotionsDiary-PET */ = {
 			isa = PBXGroup;
 			children = (
+				D6F0E12729250CC4005E760C /* NewEntry */,
 				D633C186291E8F8700B53792 /* PresentationController */,
 				D6E8719F2911A0260058E83D /* Sources */,
 				D6E8719E2911A0060058E83D /* Resources */,
@@ -185,6 +192,16 @@
 				D6E871A32911A0860058E83D /* Event.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D6F0E12729250CC4005E760C /* NewEntry */ = {
+			isa = PBXGroup;
+			children = (
+				D6F0E12829250CE0005E760C /* Model.swift */,
+				D6F0E12A29250CF8005E760C /* ViewController.swift */,
+				D6F0E12C29250D16005E760C /* ViewCell.swift */,
+			);
+			path = NewEntry;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,10 +300,13 @@
 				D6C54A2A290D3B6E004F3722 /* AppDelegate.swift in Sources */,
 				D6C54A3F290D4237004F3722 /* DiaryView.swift in Sources */,
 				D6C54A51290D4B15004F3722 /* MistakesViewController.swift in Sources */,
+				D6F0E12B29250CF8005E760C /* ViewController.swift in Sources */,
 				D6C54A4F290D4AEB004F3722 /* EmotionsViewController.swift in Sources */,
 				D6DD7E48291BC1C300D62FB3 /* Сделать.swift in Sources */,
 				D6C54A2C290D3B6E004F3722 /* SceneDelegate.swift in Sources */,
 				D6E8719529119DA60058E83D /* CollectionView.swift in Sources */,
+				D6F0E12929250CE0005E760C /* Model.swift in Sources */,
+				D6F0E12D29250D16005E760C /* ViewCell.swift in Sources */,
 				D6C54A47290D42AE004F3722 /* CalendarCell.swift in Sources */,
 				D6E8719929119FB90058E83D /* SectionHeader.swift in Sources */,
 			);

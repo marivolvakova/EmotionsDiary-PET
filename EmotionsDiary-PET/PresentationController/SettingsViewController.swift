@@ -117,6 +117,7 @@ class SettingsViewController: UIViewController {
             }
         }
     }
+    
     func setupLayout() {
         topView.snp.makeConstraints { (make) in
             make.top.left.right.equalToSuperview()

@@ -52,26 +52,30 @@ class CalendarView: UIView {
         return label
     }()
     
-    lazy var quoateView: UIView = {
+    let gradient: CAGradientLayer = {
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIColor.red.cgColor, UIColor.blue.cgColor]
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
+        return gradient
+    }()
+    
+     var quoateView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray
+        view.clipsToBounds = true
         view.layer.cornerRadius = 15
         view.layer.masksToBounds = true
+         //view.addBlurEffect()
+         //view.backgroundColor = UIColor.red.withAlphaComponent(0.5)
         return view
     }()
     
     lazy var toggle = UISwitch()
-    
 
-    
-
-    
     @objc private func buttonPressed() {
         networkManager.fetchData()
     }
-    
 
-    
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.tintColor = .black
@@ -124,6 +128,7 @@ class CalendarView: UIView {
         setupHierarchy()
         setupLayout()
         setupView()
+        fetchImage()
     }
     
     // MARK: - Settings
@@ -217,6 +222,45 @@ class CalendarView: UIView {
 
 
 
+extension UIView {
+    func applyGradient(colours: [UIColor]) -> Void {
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.frame = self.bounds
+        gradient.colors = colours.map { $0.cgColor }
+        self.layer.addSublayer(gradient)
+    }
+}
 
 
+extension UIView {
+    func addBlurEffect() {
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.bounds
 
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
+        self.addSubview(blurEffectView)
+    }
+}
+
+
+                                             
+                                             
+                                             
+                                             
+extension CalendarView {
+            func fetchImage() {
+                guard let url = URL(string: "https://catherineasquithgallery.com/uploads/posts/2021-02/1613391002_151-p-fon-dlya-prezentatsii-estetika-bezhevogo-178.jpg") else { return }
+                URLSession.shared.dataTask(with: url) { data, response, error in
+                    if error != nil {
+                        fatalError("ERROR IN URL")
+                    } else if let response = response as? HTTPURLResponse, response.statusCode == 200 {
+                        guard let data = data else { return }
+                        DispatchQueue.main.async {
+                            self.quoateView.backgroundColor = UIColor(patternImage: UIImage(data: data)!)
+                        }
+                    }
+                }.resume()
+            }
+            
+}
